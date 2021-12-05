@@ -47,7 +47,7 @@ static void my_application_activate(GApplication* application) {
     gtk_window_set_title(window, "Spotiload");
   }
 
-  gtk_window_set_default_size(window, 700, 240);
+  gtk_window_set_default_size(window, 650, 350);
   gtk_widget_show(GTK_WIDGET(window));
   gtk_window_set_icon_from_file(window, "/media/FestplatteJ/900Programming/000Flutter/spotiload/linux/assets/app-icon.png", NULL);
 
