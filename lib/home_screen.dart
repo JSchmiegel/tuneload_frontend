@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:spotiload/global_var.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return _HomeScreenState();
@@ -18,9 +21,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Spotiload')),
+      // appBar: AppBar(title: const Text('Spotiload')),
       body: Container(
-        margin: const EdgeInsets.all(24),
+        margin: firstMargin,
         child: Form(
             key: _formKey,
             child: Column(
@@ -43,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     filled: true,
                     hintText:
                         'e.g. https://open.spotify.com/playlist/0MXkk6SXVipi7RRLW7GYze',
-                    labelText: 'Enter a Album/Playlist URL',
+                    labelText: 'Enter a album or playlist url',
                   ),
                   onChanged: (value) {
                     url = value;
@@ -128,12 +131,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                          color: Colors.green[500],
+                          color: greenColor,
                           borderRadius: BorderRadius.circular(6)),
                       child: TextButton(
                         child: const Text(
                           'Download',
-                          style: TextStyle(color: Colors.white, fontSize: 16),
+                          style: styleButton,
                         ),
                         onPressed: () {
                           // Validate the form by getting the FormState from the GlobalKey
@@ -147,7 +150,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             context: context,
                             builder: (context) => AlertDialog(
                               title: const Text('Test'),
-                              content: Text('The url was $url'),
+                              content: Text('''URL: $url
+Upload: $upload
+Search for Lyrics: $searchLyrics
+Delete JSOn: $deleteJson'''),
                               actions: [
                                 TextButton(
                                   child: const Text('Done'),

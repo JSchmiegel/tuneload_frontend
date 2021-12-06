@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spotiload/home_screen.dart';
+import 'package:spotiload/progress_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: HomeScreen(),
+      // home: HomeScreen(),
+      home: ProgressScreen(),
     );
   }
 }

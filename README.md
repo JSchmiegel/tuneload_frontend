@@ -9,15 +9,17 @@ Idea Logo/Name?
 [ ] documentation of functions
 [ ] youtube playlists
 [ ] .exe erstellen
+[ ] testing?
 
 
 ## *To-do Layout:*
 [ ] Tool-Tips (https://api.flutter.dev/flutter/material/Tooltip-class.html)
 [ ] Screens
-    [ ] Home
+    [x] Home
     [ ] Configuration
     [ ] Progress? -> Screen or Popup?
     [ ] Choose Matching -> Screen or Popup?
+[ ] semanticsLabel 
 
 
 
