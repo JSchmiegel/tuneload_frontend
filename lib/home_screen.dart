@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spotiload/global_var.dart';
+import 'package:spotiload/progress_screen.dart';
+import 'package:spotiload/setting_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -21,7 +23,21 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: const Text('Spotiload')),
+      appBar: AppBar(
+        title: const Text('Spotiload'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SettingScreen()),
+              );
+            },
+            splashRadius: 20,
+          )
+        ],
+      ),
       body: Container(
         margin: firstMargin,
         child: Form(
@@ -33,8 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   autofocus: true,
                   textInputAction: TextInputAction.next,
                   validator: (value) {
-                    String pattern =
-                        r'^https?:\/\/((open.spotify.com\/(playlist|album)\/)|((www.youtube.com)\/(playlist\?list|watch\?.*list)))';
+                    String pattern = r'^https?:\/\/((open.spotify.com\/(playlist|album)\/)|((www.youtube.com)\/(playlist\?list|watch\?.*list)))';
                     RegExp regex = RegExp(pattern);
                     if (value!.isEmpty) {
                       return 'Please enter an url.';
@@ -44,8 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   decoration: const InputDecoration(
                     filled: true,
-                    hintText:
-                        'e.g. https://open.spotify.com/playlist/0MXkk6SXVipi7RRLW7GYze',
+                    hintText: 'e.g. https://open.spotify.com/playlist/0MXkk6SXVipi7RRLW7GYze',
                     labelText: 'Enter a album or playlist url',
                   ),
                   onChanged: (value) {
@@ -130,9 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Container(
                       padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          color: greenColor,
-                          borderRadius: BorderRadius.circular(6)),
+                      decoration: BoxDecoration(color: greenColor, borderRadius: BorderRadius.circular(6)),
                       child: TextButton(
                         child: const Text(
                           'Download',
@@ -146,23 +158,27 @@ class _HomeScreenState extends State<HomeScreen> {
                             return;
                           }
 
-                          showDialog<void>(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: const Text('Test'),
-                              content: Text('''URL: $url
-Upload: $upload
-Search for Lyrics: $searchLyrics
-Delete JSOn: $deleteJson'''),
-                              actions: [
-                                TextButton(
-                                  child: const Text('Done'),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                              ],
-                            ),
+//                           showDialog<void>(
+//                             context: context,
+//                             builder: (context) => AlertDialog(
+//                               title: const Text('Test'),
+//                               content: Text('''URL: $url
+// Upload: $upload
+// Search for Lyrics: $searchLyrics
+// Delete JSOn: $deleteJson'''),
+//                               actions: [
+//                                 TextButton(
+//                                   child: const Text('Done'),
+//                                   onPressed: () {
+//                                     Navigator.of(context).pop();
+//                                   },
+//                                 ),
+//                               ],
+//                             ),
+//                           );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const ProgressScreen()),
                           );
                         },
                       ),

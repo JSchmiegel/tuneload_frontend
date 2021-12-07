@@ -15,58 +15,66 @@ class _ProgressScreenState extends State<ProgressScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-          margin: firstMargin,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              const Text('Progress of downloading X titles:', style: styleText),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
+    return WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+          // appBar: AppBar(title: const Text('Spotiload')),
+          body: Container(
+              margin: firstMargin,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Text('Doing blablabla ....'),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  const Text('Progress of downloading X titles:', style: styleText),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      SizedBox(
-                        width: 500,
-                        child: LinearProgressIndicator(
-                          value: progress,
-                        ),
-                      ),
-                      // const Text('Here should be a LinearProgressIndicator'),
-                      IconButton(
-                        icon: const Icon(Icons.close),
-                        onPressed: () {
-                          showDialog<void>(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: const Text('Cancel'),
-                              content: const Text(
-                                  'You clicked the button to cancel the acction'),
-                              actions: [
-                                TextButton(
-                                  child: const Text('Done'),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                              ],
+                      const Text('Doing blablabla ....'),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          SizedBox(
+                            width: 500,
+                            child: LinearProgressIndicator(
+                              value: progress,
                             ),
-                          );
-                        },
-                        splashRadius: 20,
-                        hoverColor: Colors.red[500],
-                      )
+                          ),
+                          // const Text('Here should be a LinearProgressIndicator'),
+                          IconButton(
+                            icon: const Icon(Icons.close),
+                            onPressed: () {
+                              showDialog<void>(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: const Text('Please Confirm'),
+                                  content: const Text('Are you sure to cancel the download?'),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () {
+                                          // Close the dialog
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text('No')),
+                                    TextButton(
+                                        onPressed: () {
+                                          // Close the dialog
+                                          Navigator.of(context).popUntil(ModalRoute.withName('/'));
+                                        },
+                                        child: const Text('Yes')),
+                                  ],
+                                ),
+                              );
+                            },
+                            splashRadius: 20,
+                            hoverColor: Colors.red[500],
+                          )
+                        ],
+                      ),
+                      Text('x %')
                     ],
                   ),
-                  Text('x %')
                 ],
-              ),
-            ],
-          )),
-    );
+              )),
+        ));
   }
 }
