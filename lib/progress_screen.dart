@@ -41,7 +41,10 @@ class _ProgressScreenState extends State<ProgressScreen> {
                           ),
                           // const Text('Here should be a LinearProgressIndicator'),
                           IconButton(
-                            icon: const Icon(Icons.close),
+                            icon: Icon(
+                              Icons.close,
+                              color: redColor,
+                            ),
                             onPressed: () {
                               showDialog<void>(
                                 context: context,
@@ -65,12 +68,12 @@ class _ProgressScreenState extends State<ProgressScreen> {
                                 ),
                               );
                             },
-                            splashRadius: 20,
-                            hoverColor: Colors.red[500],
+                            splashRadius: buttonSplashRadius,
+                            // hoverColor: Colors.red[500],
                           )
                         ],
                       ),
-                      Text('x %')
+                      const Text('x %')
                     ],
                   ),
                 ],

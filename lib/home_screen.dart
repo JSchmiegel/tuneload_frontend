@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 MaterialPageRoute(builder: (context) => const SettingScreen()),
               );
             },
-            splashRadius: 20,
+            splashRadius: buttonSplashRadius,
           )
         ],
       ),

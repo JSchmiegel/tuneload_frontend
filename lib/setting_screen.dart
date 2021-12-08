@@ -14,7 +14,17 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Settings')),
+        appBar: AppBar(
+          title: const Text('Settings'),
+          leading: IconButton(
+              icon: const Icon(
+                Icons.chevron_left,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              splashRadius: buttonSplashRadius),
+        ),
         body: Container(
             margin: firstMargin,
             child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [const Text('TODO!!', style: styleText)])));

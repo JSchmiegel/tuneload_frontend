@@ -49,7 +49,7 @@ static void my_application_activate(GApplication* application) {
 
   gtk_window_set_default_size(window, 650, 350);
   gtk_widget_show(GTK_WIDGET(window));
-  gtk_window_set_icon_from_file(window, "/media/FestplatteJ/900Programming/000Flutter/spotiload/linux/assets/app-icon.png", NULL);
+  gtk_window_set_icon_from_file(window, "/media/FestplatteJ/900Programming/020Spotiload/spotiload_frontend/linux/assets/app-icon.png", NULL);
 
   g_autoptr(FlDartProject) project = fl_dart_project_new();
   fl_dart_project_set_dart_entrypoint_arguments(project, self->dart_entrypoint_arguments);
