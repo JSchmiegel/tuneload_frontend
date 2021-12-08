@@ -81,17 +81,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             Row(
                               children: [
                                 Checkbox(
-                                  value: upload,
-                                  onChanged: (value) {
-                                    // When the value of the checkbox changes,
-                                    // update the FormFieldState so the form is
-                                    // re-validated.
-                                    formFieldState.didChange(value);
-                                    setState(() {
-                                      upload = value;
-                                    });
-                                  },
-                                ),
+                                    value: upload,
+                                    onChanged: (value) {
+                                      // When the value of the checkbox changes,
+                                      // update the FormFieldState so the form is
+                                      // re-validated.
+                                      formFieldState.didChange(value);
+                                      setState(() {
+                                        upload = value;
+                                      });
+                                    },
+                                    splashRadius: buttonSplashRadius),
                                 Text(
                                   'direct upload to plex server',
                                   style: Theme.of(context).textTheme.subtitle1,
@@ -101,17 +101,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             Row(
                               children: [
                                 Checkbox(
-                                  value: searchLyrics,
-                                  onChanged: (value) {
-                                    // When the value of the checkbox changes,
-                                    // update the FormFieldState so the form is
-                                    // re-validated.
-                                    formFieldState.didChange(value);
-                                    setState(() {
-                                      searchLyrics = value;
-                                    });
-                                  },
-                                ),
+                                    value: searchLyrics,
+                                    onChanged: (value) {
+                                      // When the value of the checkbox changes,
+                                      // update the FormFieldState so the form is
+                                      // re-validated.
+                                      formFieldState.didChange(value);
+                                      setState(() {
+                                        searchLyrics = value;
+                                      });
+                                    },
+                                    splashRadius: buttonSplashRadius),
                                 Text(
                                   'search for "... Lyrics"',
                                   style: Theme.of(context).textTheme.subtitle1,
@@ -121,17 +121,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             Row(
                               children: [
                                 Checkbox(
-                                  value: deleteJson,
-                                  onChanged: (value) {
-                                    // When the value of the checkbox changes,
-                                    // update the FormFieldState so the form is
-                                    // re-validated.
-                                    formFieldState.didChange(value);
-                                    setState(() {
-                                      deleteJson = value;
-                                    });
-                                  },
-                                ),
+                                    value: deleteJson,
+                                    onChanged: (value) {
+                                      // When the value of the checkbox changes,
+                                      // update the FormFieldState so the form is
+                                      // re-validated.
+                                      formFieldState.didChange(value);
+                                      setState(() {
+                                        deleteJson = value;
+                                      });
+                                    },
+                                    splashRadius: buttonSplashRadius),
                                 Text(
                                   'delete .json after download',
                                   style: Theme.of(context).textTheme.subtitle1,
