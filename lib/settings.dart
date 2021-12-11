@@ -23,4 +23,13 @@ class Settings {
         hostToken: json['token'],
         pathMusic: json['paths']['music']);
   }
+
+  Map toJson() => {
+        'address': hostAddress,
+        'port': hostPort,
+        'user': hostUser,
+        'password': hostPasswd,
+        'token': hostToken,
+        'paths': {'music': pathMusic}
+      };
 }

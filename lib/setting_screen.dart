@@ -1,7 +1,6 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:spotiload/backen_communicator.dart';
+import 'package:spotiload/api.dart';
 import 'package:spotiload/global_var.dart';
 import 'package:spotiload/settings.dart';
 
@@ -15,8 +14,15 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  bool passEnable = false;
-  bool tokenEnable = false;
+  TextEditingController txtCtrHostAddress = TextEditingController();
+  TextEditingController txtCtrHostPort = TextEditingController();
+  TextEditingController txtCtrHostUser = TextEditingController();
+  TextEditingController txtCtrHostPasswd = TextEditingController();
+  TextEditingController txtCtrHostToken = TextEditingController();
+  TextEditingController txtCtrPathMusic = TextEditingController();
+
+  bool passEnable = true;
+  bool tokenEnable = true;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +58,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       flex: 1,
                     ),
                     FutureBuilder<Settings>(
-                        future: _callBackendApi(),
+                        future: _callBackendApiGet(),
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             return Table(
@@ -70,7 +76,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                   Padding(
                                     padding: paddingSettingInput,
                                     child: TextField(
-                                      controller: TextEditingController()..text = snapshot.data!.hostAddress,
+                                      controller: txtCtrHostAddress..text = snapshot.data!.hostAddress,
                                       decoration: decorationSettingInput,
                                       style: styleSettingInput,
                                     ),
@@ -85,7 +91,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                   Padding(
                                     padding: paddingSettingInput,
                                     child: TextField(
-                                      controller: TextEditingController()..text = snapshot.data!.hostPort,
+                                      controller: txtCtrHostPort..text = snapshot.data!.hostPort,
                                       decoration: decorationSettingInput,
                                       style: styleSettingInput,
                                     ),
@@ -100,7 +106,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                   Padding(
                                     padding: paddingSettingInput,
                                     child: TextField(
-                                      controller: TextEditingController()..text = snapshot.data!.hostUser,
+                                      controller: txtCtrHostUser..text = snapshot.data!.hostUser,
                                       decoration: decorationSettingInput,
                                       style: styleSettingInput,
                                     ),
@@ -115,7 +121,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                   Padding(
                                     padding: paddingSettingInput,
                                     child: TextField(
-                                      controller: TextEditingController()..text = snapshot.data!.hostPasswd,
+                                      controller: txtCtrHostPasswd..text = snapshot.data!.hostPasswd,
                                       decoration: decorationSettingInput,
                                       style: styleSettingInput,
                                       obscureText: passEnable,
@@ -141,7 +147,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                   Padding(
                                     padding: paddingSettingInput,
                                     child: TextField(
-                                      controller: TextEditingController()..text = snapshot.data!.hostToken,
+                                      controller: txtCtrHostToken..text = snapshot.data!.hostToken,
                                       decoration: decorationSettingInput,
                                       style: styleSettingInput,
                                       obscureText: tokenEnable,
@@ -167,7 +173,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                   Padding(
                                     padding: paddingSettingInput,
                                     child: TextField(
-                                      controller: TextEditingController()..text = snapshot.data!.pathMusic,
+                                      controller: txtCtrPathMusic..text = snapshot.data!.pathMusic,
                                       decoration: decorationSettingInput,
                                       style: styleSettingInput,
                                     ),
@@ -208,12 +214,13 @@ class _SettingScreenState extends State<SettingScreen> {
                               actions: [
                                 TextButton(
                                     onPressed: () {
-                                      // Close the dialog
                                       Navigator.of(context).pop();
                                     },
                                     child: const Text('No')),
                                 TextButton(
                                     onPressed: () {
+                                      _callBackendApiPut();
+                                      // Navigator.of(context).pop();
                                       Navigator.of(context).popUntil(ModalRoute.withName('/'));
                                     },
                                     child: const Text('Yes')),
@@ -229,9 +236,27 @@ class _SettingScreenState extends State<SettingScreen> {
         ));
   }
 
-  Future<Settings> _callBackendApi() async {
-    var api = BackendCommunicator();
+  Future<Settings> _callBackendApiGet() async {
+    var api = Api();
     final response = await api.getSettings();
+    if (response.statusCode == 200) {
+      return Settings.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Failed to load settings');
+    }
+  }
+
+  Future<Settings> _callBackendApiPut() async {
+    var settings = Settings(
+        hostAddress: txtCtrHostAddress.text,
+        hostPort: txtCtrHostPort.text,
+        hostUser: txtCtrHostUser.text,
+        hostPasswd: txtCtrHostPasswd.text,
+        hostToken: txtCtrHostToken.text,
+        pathMusic: txtCtrPathMusic.text);
+
+    var api = Api();
+    final response = await api.putSettings(settings);
     if (response.statusCode == 200) {
       return Settings.fromJson(json.decode(response.body));
     } else {
