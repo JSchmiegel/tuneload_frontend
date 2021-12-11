@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:spotiload/global_var.dart';
-import 'package:spotiload/progress_screen.dart';
-import 'package:spotiload/setting_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -29,10 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SettingScreen()),
-              );
+              Navigator.pushNamed(context, '/settings');
             },
             splashRadius: buttonSplashRadius,
           )
@@ -176,10 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
 //                               ],
 //                             ),
 //                           );
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => const ProgressScreen()),
-                          );
+                          Navigator.pushNamed(context, '/progress');
                         },
                       ),
                     ),

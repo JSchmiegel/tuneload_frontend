@@ -19,7 +19,6 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const HomeScreen(),
-        // When navigating to the "/second" route, build the SecondScreen widget.
         '/progress': (context) => const ProgressScreen(),
         '/settings': (context) => const SettingScreen(),
       },
