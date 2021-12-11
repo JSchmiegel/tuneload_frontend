@@ -5,6 +5,7 @@ class BackendCommunicator {
   final String host = "http://127.0.0.1:32500";
 
   // [ ] better return direct the json?
+  // [ ] error catching when server down!
   Future<http.Response> getSettings() async {
     final String uri = "$host/settings";
     Map<String, String> headers = HashMap();

@@ -1,26 +1,26 @@
 class Settings {
-  final String host_address;
-  final String host_port;
-  final String host_user;
-  final String host_passwd;
-  final String host_token;
-  final String path_music;
+  final String hostAddress;
+  final String hostPort;
+  final String hostUser;
+  final String hostPasswd;
+  final String hostToken;
+  final String pathMusic;
 
   Settings(
-      {required this.host_address,
-      required this.host_port,
-      required this.host_user,
-      required this.host_passwd,
-      required this.host_token,
-      required this.path_music});
+      {required this.hostAddress,
+      required this.hostPort,
+      required this.hostUser,
+      required this.hostPasswd,
+      required this.hostToken,
+      required this.pathMusic});
 
   factory Settings.fromJson(Map<String, dynamic> json) {
     return Settings(
-        host_address: json['address'],
-        host_port: json['port'],
-        host_user: json['user'],
-        host_passwd: json['password'],
-        host_token: json['token'],
-        path_music: json['paths']['music']);
+        hostAddress: json['address'],
+        hostPort: json['port'],
+        hostUser: json['user'],
+        hostPasswd: json['password'],
+        hostToken: json['token'],
+        pathMusic: json['paths']['music']);
   }
 }

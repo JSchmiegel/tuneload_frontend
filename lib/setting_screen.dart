@@ -31,60 +31,60 @@ class _SettingScreenState extends State<SettingScreen> {
         ),
         body: Container(
             margin: firstMargin,
-            child: FutureBuilder<Settings>(
-                future: _callBackendApi(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                      Row(
-                        children: const [Text('PLEX:')],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const Spacer(
-                            flex: 1,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: const [
-                              Text('Host-address:'),
-                              Text('Host-port:'),
-                              Text('User:'),
-                              Text('Password:'),
-                              Text('Token:'),
-                              Text('Path music: ')
-                            ],
-                          ),
-                          const Spacer(
-                            flex: 2,
-                          ),
-                          Column(
+            child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+              Row(
+                children: const [Text('PLEX:')],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Spacer(
+                    flex: 1,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Text('Host-address:'),
+                      Text('Host-port:'),
+                      Text('User:'),
+                      Text('Password:'),
+                      Text('Token:'),
+                      Text('Path music: ')
+                    ],
+                  ),
+                  const Spacer(
+                    flex: 2,
+                  ),
+                  FutureBuilder<Settings>(
+                      future: _callBackendApi(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(snapshot.data!.host_address),
-                              Text(snapshot.data!.host_port),
-                              Text(snapshot.data!.host_user),
-                              Text(snapshot.data!.host_passwd),
-                              Text(snapshot.data!.host_token),
-                              Text(snapshot.data!.path_music)
+                              Text(snapshot.data!.hostAddress),
+                              Text(snapshot.data!.hostPort),
+                              Text(snapshot.data!.hostUser),
+                              Text(snapshot.data!.hostPasswd),
+                              Text(snapshot.data!.hostToken),
+                              Text(snapshot.data!.pathMusic)
                             ],
-                          ),
-                          const Spacer(
-                            flex: 5,
-                          ),
-                        ],
-                      ),
-                    ]);
-                  } else if (snapshot.hasError) {
-                    return Text('${snapshot.error}');
-                  }
-                  return const CircularProgressIndicator();
-                })));
+                          );
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+                        return const CircularProgressIndicator();
+                      }),
+                  const Spacer(
+                    flex: 5,
+                  ),
+                ],
+              ),
+            ])));
   }
 
   Future<Settings> _callBackendApi() async {
