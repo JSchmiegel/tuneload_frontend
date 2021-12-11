@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 
 const firstMargin = EdgeInsets.all(33);
 double buttonSplashRadius = 15;
