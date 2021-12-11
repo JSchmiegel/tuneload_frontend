@@ -33,7 +33,12 @@ class _SettingScreenState extends State<SettingScreen> {
             margin: firstMargin,
             child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
               Row(
-                children: const [Text('PLEX:')],
+                children: const [
+                  Text(
+                    'PLEX:',
+                    style: styleText,
+                  )
+                ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -45,18 +50,19 @@ class _SettingScreenState extends State<SettingScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
-                    children: const [
-                      Text('Host-address:'),
-                      Text('Host-port:'),
-                      Text('User:'),
-                      Text('Password:'),
-                      Text('Token:'),
-                      Text('Path music: ')
+                    children: [
+                      Text('Host-address:', style: Theme.of(context).textTheme.subtitle1),
+                      Text('Host-port:', style: Theme.of(context).textTheme.subtitle1),
+                      Text('User:', style: Theme.of(context).textTheme.subtitle1),
+                      Text('Password:', style: Theme.of(context).textTheme.subtitle1),
+                      Text('Token:', style: Theme.of(context).textTheme.subtitle1),
+                      Text('Path music: ', style: Theme.of(context).textTheme.subtitle1)
                     ],
                   ),
                   const Spacer(
                     flex: 2,
                   ),
+                  // SizedBox(width: 50, height: 40, child: TextField(controller: TextEditingController()..text = 'Your initial value')),
                   FutureBuilder<Settings>(
                       future: _callBackendApi(),
                       builder: (context, snapshot) {
@@ -66,7 +72,18 @@ class _SettingScreenState extends State<SettingScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(snapshot.data!.hostAddress),
+                              SizedBox(
+                                  width: 200,
+                                  height: 30,
+                                  child: TextField(
+                                    controller: TextEditingController()..text = snapshot.data!.hostAddress,
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                                    ),
+                                    style: Theme.of(context).textTheme.subtitle1,
+                                  )),
+                              // Text(snapshot.data!.hostAddress),
                               Text(snapshot.data!.hostPort),
                               Text(snapshot.data!.hostUser),
                               Text(snapshot.data!.hostPasswd),
@@ -80,7 +97,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         return const CircularProgressIndicator();
                       }),
                   const Spacer(
-                    flex: 5,
+                    flex: 3,
                   ),
                 ],
               ),
