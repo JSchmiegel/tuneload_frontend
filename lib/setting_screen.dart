@@ -81,9 +81,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                       style: styleSettingInput,
                                     ),
                                   ),
-                                  const Spacer(
-                                    flex: 1,
-                                  )
+                                  spacerTableSettings
                                 ]),
                                 TableRow(children: [
                                   Text('Host-port:', style: Theme.of(context).textTheme.subtitle1),
@@ -96,9 +94,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                       style: styleSettingInput,
                                     ),
                                   ),
-                                  const Spacer(
-                                    flex: 1,
-                                  )
+                                  spacerTableSettings
                                 ]),
                                 TableRow(children: [
                                   Text('User:', style: Theme.of(context).textTheme.subtitle1),
@@ -111,9 +107,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                       style: styleSettingInput,
                                     ),
                                   ),
-                                  const Spacer(
-                                    flex: 1,
-                                  )
+                                  spacerTableSettings
                                 ]),
                                 TableRow(children: [
                                   Text('Password:', style: Theme.of(context).textTheme.subtitle1),
@@ -178,9 +172,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                       style: styleSettingInput,
                                     ),
                                   ),
-                                  const Spacer(
-                                    flex: 1,
-                                  )
+                                  spacerTableSettings
                                 ]),
                               ],
                             );
