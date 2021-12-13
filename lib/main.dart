@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:spotiload/home_screen.dart';
-import 'package:spotiload/progress_screen.dart';
-import 'package:spotiload/setting_screen.dart';
+import 'package:spotiload/screens/home_screen.dart';
+import 'package:spotiload/screens/progress_screen.dart';
+import 'package:spotiload/screens/setting_screen.dart';
 
 void main() {
   runApp(const MyApp());
