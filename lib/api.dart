@@ -1,9 +1,10 @@
 import 'dart:collection';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:spotiload/global_var.dart';
 
 class Api {
-  final String _host = "http://127.0.0.1:32500";
+  final String _host = globalHost;
 
   // [ ] better return direct the json?
   // [ ] error catching when server down!

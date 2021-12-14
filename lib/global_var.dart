@@ -20,3 +20,6 @@ const paddingSettingInput = EdgeInsets.all(3.0);
 const spacerTableSettings = SizedBox(
   width: 20,
 );
+
+// api
+const String globalHost = "http://127.0.0.1:32500";
