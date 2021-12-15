@@ -22,4 +22,4 @@ const spacerTableSettings = SizedBox(
 );
 
 // api
-const String globalHost = "http://127.0.0.1:32500";
+const String globalHost = "127.0.0.1:32500";

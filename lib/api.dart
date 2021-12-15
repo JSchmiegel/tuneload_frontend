@@ -9,12 +9,11 @@ class Api {
   // [ ] better return direct the json?
   // [ ] error catching when server down!
   Future<http.Response> getSettings() async {
-    final String uri = "$_host/settings";
-    Map<String, String> headers = HashMap();
-    headers.putIfAbsent('Accept', () => 'application/json');
+    const String uri = '/settings';
+    var headers = {'Accept': 'application/json'};
     // try {
     http.Response response = await http.get(
-      Uri.parse(uri),
+      Uri.http(_host, uri),
       headers: headers,
     );
     return response;
@@ -24,14 +23,23 @@ class Api {
   }
 
   Future<http.Response> putSettings(settings) async {
-    final String uri = "$_host/settings";
-    Map<String, String> headers = HashMap();
-    headers.putIfAbsent('Content-type', () => 'application/json');
-    headers.putIfAbsent('Accept', () => 'application/json');
+    const String uri = '/settings';
+    var headers = {'Content-type': 'application/json', 'Accept': 'application/json'};
     http.Response response = await http.put(
-      Uri.parse(uri),
+      Uri.http(_host, uri),
       headers: headers,
       body: jsonEncode(settings),
+    );
+    return response;
+  }
+
+  Future<http.Response> getInit(url) async {
+    const String uri = '/settings';
+    var queryParameters = {'url': url};
+    var headers = {'Accept': 'application/json'};
+    http.Response response = await http.get(
+      Uri.http(_host, uri, queryParameters),
+      headers: headers,
     );
     return response;
   }
