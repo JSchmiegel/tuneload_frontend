@@ -34,7 +34,7 @@ class Api {
   }
 
   Future<http.Response> getInit(url) async {
-    const String uri = '/settings';
+    const String uri = '/spotiload/init';
     var queryParameters = {'url': url};
     var headers = {'Accept': 'application/json'};
     http.Response response = await http.get(

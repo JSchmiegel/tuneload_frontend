@@ -16,11 +16,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Spotiload',
-      initialRoute: '/',
+      initialRoute: HomeScreen.routeName,
       routes: {
-        '/': (context) => const HomeScreen(),
-        '/progress': (context) => const ProgressScreen(),
-        '/settings': (context) => const SettingScreen(),
+        HomeScreen.routeName: (context) => const HomeScreen(),
+        ProgressScreen.routeName: (context) => const ProgressScreen(),
+        SettingScreen.routeName: (context) => const SettingScreen(),
       },
       theme: ThemeData(
         primarySwatch: Colors.green,

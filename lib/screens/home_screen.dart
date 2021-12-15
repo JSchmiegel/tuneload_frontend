@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:spotiload/api.dart';
 import 'package:spotiload/global_var.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  static const routeName = '/';
 
   @override
   State<StatefulWidget> createState() {
@@ -15,6 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
   bool? upload = true;
   bool? deleteJson = true;
   bool? searchLyrics = true;
+
+  Map<String, dynamic>? initResponse;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -171,7 +178,9 @@ class _HomeScreenState extends State<HomeScreen> {
 //                               ],
 //                             ),
 //                           );
-                          Navigator.pushNamed(context, '/progress');
+                          // Map<String, dynamic> response = await _callBackendApiGetInit();
+                          // _callBackendApiGetInit();
+                          Navigator.pushNamed(context, '/progress', arguments: url);
                         },
                       ),
                     ),

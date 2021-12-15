@@ -7,6 +7,8 @@ import 'package:spotiload/settings.dart';
 class SettingScreen extends StatefulWidget {
   const SettingScreen({Key? key}) : super(key: key);
 
+  static const routeName = '/settings';
+
   @override
   State<StatefulWidget> createState() {
     return _SettingScreenState();
