@@ -36,7 +36,7 @@
 
 
 ## *To-do Licenses:*
-[ ] Logo License
-    [ ] Font
-    [ ] Images
-    [ ] Libraries
+- [ ] Logo License
+    - [ ] Font
+    - [ ] Images
+    - [ ] Libraries
