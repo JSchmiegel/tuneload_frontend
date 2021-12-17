@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:spotiload/screens/home_screen.dart';
-import 'package:spotiload/screens/progress_screen.dart';
-import 'package:spotiload/screens/setting_screen.dart';
+import 'package:spotiload/pages/homepage.dart';
+import 'package:spotiload/pages/progresspage.dart';
+import 'package:spotiload/pages/settingpage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,11 +16,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Spotiload',
-      initialRoute: HomeScreen.routeName,
+      initialRoute: HomePage.routeName,
       routes: {
-        HomeScreen.routeName: (context) => const HomeScreen(),
-        ProgressScreen.routeName: (context) => const ProgressScreen(),
-        SettingScreen.routeName: (context) => const SettingScreen(),
+        HomePage.routeName: (context) => const HomePage(),
+        ProgressPage.routeName: (context) => const ProgressPage(),
+        SettingPage.routeName: (context) => const SettingPage(),
       },
       theme: ThemeData(
         primarySwatch: Colors.green,
