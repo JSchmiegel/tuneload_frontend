@@ -231,8 +231,7 @@ class _SettingPageState extends State<SettingPage> {
   }
 
   Future<Settings> _callBackendApiGet() async {
-    var api = APIHelper();
-    final response = await api.getSettings();
+    final response = await APIHelper.getSettings();
     if (response.statusCode == 200) {
       return Settings.fromJson(json.decode(response.body));
     } else {
@@ -249,8 +248,7 @@ class _SettingPageState extends State<SettingPage> {
         hostToken: txtCtrHostToken.text,
         pathMusic: txtCtrPathMusic.text);
 
-    var api = APIHelper();
-    final response = await api.putSettings(settings);
+    final response = await APIHelper.putSettings(settings);
     if (response.statusCode == 200) {
       return Settings.fromJson(json.decode(response.body));
     } else {

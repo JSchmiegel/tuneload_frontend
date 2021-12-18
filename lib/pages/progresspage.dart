@@ -38,7 +38,7 @@ class _ProgressPageState extends State<ProgressPage> {
   _getInitResponse(urlArg) async {
     var provider = Provider.of<ProgressPageProvider>(context, listen: false);
     var response = await APIHelper.getInit(urlArg);
-    if (response.statusCode == 200) {
+    if (response.isSuccessful) {
       provider.setInitResponse(response);
     } else {
       _showSnackbar(response.statusCode.toString());
@@ -69,7 +69,7 @@ class _ProgressPageState extends State<ProgressPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                              'Progress of downloading "${json.decode(provider.initResponse.body)['org_name']}" (${json.decode(provider.initResponse.body)['songs'].length} songs):',
+                              'Progress of downloading "${provider.initResponse.data['org_name']}" (${provider.initResponse.data['songs'].length} songs):',
                               style: styleText),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
