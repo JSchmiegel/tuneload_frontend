@@ -1,15 +1,19 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:spotiload/helper/apihelper.dart';
 import 'package:spotiload/global_var.dart';
+import 'package:spotiload/providers/progresspageprovider.dart';
 
 class ProgressPage extends StatefulWidget {
-  const ProgressPage({Key? key}) : super(key: key);
+  // const ProgressPage({Key? key}) : super(key: key);
+
+  final String urlArg;
+
+  const ProgressPage({Key? key, required this.urlArg}) : super(key: key);
 
   static const routeName = '/progress';
-
-  // Map<String, dynamic> responseInit = await
 
   @override
   State<StatefulWidget> createState() {
@@ -18,27 +22,54 @@ class ProgressPage extends StatefulWidget {
 }
 
 class _ProgressPageState extends State<ProgressPage> {
-  String? urlArg;
+  _showSnackbar(String message, {Color? bgColor}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: bgColor ?? Colors.red,
+      ),
+    );
+  }
+
+  _hideSnackbar() {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+  }
+
+  _getInitResponse(urlArg) async {
+    var provider = Provider.of<ProgressPageProvider>(context, listen: false);
+    var response = await APIHelper.getInit(urlArg);
+    if (response.statusCode == 200) {
+      provider.setInitResponse(response);
+    } else {
+      _showSnackbar(response.statusCode.toString());
+    }
+    provider.setIsProcessing(false);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getInitResponse(widget.urlArg);
+  }
 
   @override
   Widget build(BuildContext context) {
     double progress = 1;
-    urlArg = ModalRoute.of(context)!.settings.arguments as String;
 
     return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
           // appBar: AppBar(title: const Text('Spotiload')),
-          body: FutureBuilder<Map>(
-              future: _callBackendApiGetInit(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Container(
+          body: Consumer<ProgressPageProvider>(
+              builder: (_, provider, __) => provider.isProcessing
+                  ? const Center(child: CircularProgressIndicator())
+                  : Container(
                       margin: firstMargin,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text('Progress of downloading "${snapshot.data!['org_name']}" (${snapshot.data!['songs'].length} songs):',
+                          Text(
+                              'Progress of downloading "${json.decode(provider.initResponse.body)['org_name']}" (${json.decode(provider.initResponse.body)['songs'].length} songs):',
                               style: styleText),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -92,24 +123,17 @@ class _ProgressPageState extends State<ProgressPage> {
                             ],
                           ),
                         ],
-                      ));
-                } else if (snapshot.hasError) {
-                  return Text('${snapshot.error}');
-                }
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }),
+                      ))),
         ));
   }
 
-  Future<Map<String, dynamic>> _callBackendApiGetInit() async {
-    var api = Api();
-    final response = await api.getInit(urlArg);
-    if (response.statusCode == 200) {
-      return json.decode(response.body);
-    } else {
-      throw Exception('Failed to get /spotiload/init');
-    }
-  }
+  // Future<Map<String, dynamic>> _callBackendApiGetInit() async {
+  //   var api = APIHelper();
+  //   final response = await api.getInit(urlArg);
+  //   if (response.statusCode == 200) {
+  //     return json.decode(response.body);
+  //   } else {
+  //     throw Exception('Failed to get /spotiload/init');
+  //   }
+  // }
 }

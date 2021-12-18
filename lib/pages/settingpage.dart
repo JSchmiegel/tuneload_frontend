@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:spotiload/helper/apihelper.dart';
 import 'package:spotiload/global_var.dart';
-import 'package:spotiload/settings.dart';
+import 'package:spotiload/models/settings.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -231,7 +231,7 @@ class _SettingPageState extends State<SettingPage> {
   }
 
   Future<Settings> _callBackendApiGet() async {
-    var api = Api();
+    var api = APIHelper();
     final response = await api.getSettings();
     if (response.statusCode == 200) {
       return Settings.fromJson(json.decode(response.body));
@@ -249,7 +249,7 @@ class _SettingPageState extends State<SettingPage> {
         hostToken: txtCtrHostToken.text,
         pathMusic: txtCtrPathMusic.text);
 
-    var api = Api();
+    var api = APIHelper();
     final response = await api.putSettings(settings);
     if (response.statusCode == 200) {
       return Settings.fromJson(json.decode(response.body));

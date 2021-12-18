@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
-              Navigator.pushNamed(context, '/settings');
+              Navigator.pushNamed(context, '/settings', arguments: url);
             },
             splashRadius: buttonSplashRadius,
           )

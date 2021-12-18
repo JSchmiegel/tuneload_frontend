@@ -1,9 +1,10 @@
 import 'dart:collection';
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:spotiload/global_var.dart';
 
-class Api {
+class APIHelper {
   final String _host = globalHost;
 
   // [ ] better return direct the json?
@@ -33,12 +34,12 @@ class Api {
     return response;
   }
 
-  Future<http.Response> getInit(url) async {
+  static Future<http.Response> getInit(urlParam) async {
     const String uri = '/spotiload/init';
-    var queryParameters = {'url': url};
+    var queryParameters = {'url': urlParam};
     var headers = {'Accept': 'application/json'};
     http.Response response = await http.get(
-      Uri.http(_host, uri, queryParameters),
+      Uri.http(globalHost, uri, queryParameters),
       headers: headers,
     );
     return response;
