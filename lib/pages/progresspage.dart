@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spotiload/helper/apihelper.dart';
-import 'package:spotiload/global_var.dart';
+import 'package:spotiload/global.dart';
 import 'package:spotiload/providers/progresspageprovider.dart';
 
 class ProgressPage extends StatefulWidget {

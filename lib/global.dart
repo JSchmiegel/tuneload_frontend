@@ -21,5 +21,16 @@ const spacerTableSettings = SizedBox(
   width: 20,
 );
 
+// Matchingpage
+const double pixelwidthRadio = 550;
+const double pixelheightRadio = 30;
+Widget blankLine = Row(
+  children: const [
+    SizedBox(
+      height: 30,
+    ),
+  ],
+);
+
 // api
 const String globalHost = "127.0.0.1:32500";

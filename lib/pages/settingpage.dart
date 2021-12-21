@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:spotiload/helper/apihelper.dart';
-import 'package:spotiload/global_var.dart';
+import 'package:spotiload/global.dart';
 import 'package:spotiload/models/settings.dart';
 
 class SettingPage extends StatefulWidget {

@@ -2,7 +2,7 @@ import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:spotiload/global_var.dart';
+import 'package:spotiload/global.dart';
 import 'package:spotiload/models/httpresponse.dart';
 
 class APIHelper {
