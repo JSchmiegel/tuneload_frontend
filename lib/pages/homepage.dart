@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:spotiload/helper/apihelper.dart';
-import 'package:spotiload/global_var.dart';
+import 'package:spotiload/global.dart';
+import 'package:spotiload/pages/matchingpage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -34,7 +35,8 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
-              Navigator.pushNamed(context, '/settings', arguments: url);
+              // Navigator.pushNamed(context, '/settings');
+              Navigator.pushNamed(context, MatchingPage.routeName);
             },
             splashRadius: buttonSplashRadius,
           )

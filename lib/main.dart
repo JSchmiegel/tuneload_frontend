@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spotiload/pages/homepage.dart';
+import 'package:spotiload/pages/matchingpage.dart';
 import 'package:spotiload/pages/progresspage.dart';
 import 'package:spotiload/pages/settingpage.dart';
 import 'package:spotiload/providers/progresspageprovider.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         //       urlArg: '',
         //     )),
         SettingPage.routeName: (context) => const SettingPage(),
+        MatchingPage.routeName: (context) => const MatchingPage(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == ProgressPage.routeName) {

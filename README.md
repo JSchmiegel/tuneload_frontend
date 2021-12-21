@@ -9,7 +9,7 @@
 - [ ] documentation of functions
 - [ ] youtube playlists
 - [ ] .exe erstellen
-- [ ] testing?
+- [ ] TESTs
 
 
 ## *To-do Layout:*
