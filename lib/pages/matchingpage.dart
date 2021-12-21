@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spotiload/global.dart';
@@ -92,116 +91,29 @@ class _MatchingPageState extends State<MatchingPage> {
                               children: [
                                 Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                                   Column(mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                          width: pixelwidthRadio,
-                                          height: pixelheightRadio,
-                                          child: ListTile(
-                                            title: Text(
-                                                '${providerMatching.matchingResponse.data['matches'][0]['album']} (${providerMatching.matchingResponse.data['matches'][0]['num_of_songs']} songs)',
-                                                style: Theme.of(context).textTheme.subtitle1),
-                                            leading: Radio<int>(
-                                              groupValue: radioGroupValue,
-                                              value: 0,
-                                              onChanged: (int? value) {
-                                                setState(() {
-                                                  radioGroupValue = value;
-                                                });
-                                              },
+                                    for (int i = 0; i < providerMatching.matchingResponse.data['matches'].length; i++)
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            width: pixelwidthRadio,
+                                            height: pixelheightRadio,
+                                            child: ListTile(
+                                              title: Text(
+                                                  '${providerMatching.matchingResponse.data['matches'][i]['album']} (${providerMatching.matchingResponse.data['matches'][i]['num_of_songs']} songs)',
+                                                  style: Theme.of(context).textTheme.subtitle1),
+                                              leading: Radio<int>(
+                                                groupValue: radioGroupValue,
+                                                value: i,
+                                                onChanged: (int? value) {
+                                                  setState(() {
+                                                    radioGroupValue = value;
+                                                  });
+                                                },
+                                              ),
                                             ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                          width: pixelwidthRadio,
-                                          height: pixelheightRadio,
-                                          child: ListTile(
-                                            title: Text(
-                                                '${providerMatching.matchingResponse.data['matches'][1]['album']} (${providerMatching.matchingResponse.data['matches'][1]['num_of_songs']} songs)',
-                                                style: Theme.of(context).textTheme.subtitle1),
-                                            leading: Radio<int>(
-                                              groupValue: radioGroupValue,
-                                              value: 1,
-                                              onChanged: (int? value) {
-                                                setState(() {
-                                                  radioGroupValue = value;
-                                                });
-                                              },
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                          width: pixelwidthRadio,
-                                          height: pixelheightRadio,
-                                          child: ListTile(
-                                            title: Text(
-                                                '${providerMatching.matchingResponse.data['matches'][2]['album']} (${providerMatching.matchingResponse.data['matches'][2]['num_of_songs']} songs)',
-                                                style: Theme.of(context).textTheme.subtitle1),
-                                            leading: Radio<int>(
-                                              groupValue: radioGroupValue,
-                                              value: 2,
-                                              onChanged: (int? value) {
-                                                setState(() {
-                                                  radioGroupValue = value;
-                                                });
-                                              },
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                          width: pixelwidthRadio,
-                                          height: pixelheightRadio,
-                                          child: ListTile(
-                                            title: Text(
-                                                '${providerMatching.matchingResponse.data['matches'][3]['album']} (${providerMatching.matchingResponse.data['matches'][3]['num_of_songs']} songs)',
-                                                style: Theme.of(context).textTheme.subtitle1),
-                                            leading: Radio<int>(
-                                              groupValue: radioGroupValue,
-                                              value: 3,
-                                              onChanged: (int? value) {
-                                                setState(() {
-                                                  radioGroupValue = value;
-                                                });
-                                              },
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                          width: pixelwidthRadio,
-                                          height: pixelheightRadio,
-                                          child: ListTile(
-                                            title: Text(
-                                                '${providerMatching.matchingResponse.data['matches'][4]['album']} (${providerMatching.matchingResponse.data['matches'][4]['num_of_songs']} songs)',
-                                                style: Theme.of(context).textTheme.subtitle1),
-                                            leading: Radio<int>(
-                                              groupValue: radioGroupValue,
-                                              value: 4,
-                                              onChanged: (int? value) {
-                                                setState(() {
-                                                  radioGroupValue = value;
-                                                });
-                                              },
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    )
+                                          )
+                                        ],
+                                      ),
                                   ]),
                                 ]),
                                 blankLine,
