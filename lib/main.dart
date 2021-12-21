@@ -3,14 +3,17 @@ import 'package:provider/provider.dart';
 import 'package:spotiload/pages/homepage.dart';
 import 'package:spotiload/pages/matchingpage.dart';
 import 'package:spotiload/pages/progresspageauto.dart';
+import 'package:spotiload/pages/progresspagemanual.dart';
 import 'package:spotiload/pages/settingpage.dart';
 import 'package:spotiload/providers/initprovider.dart';
 import 'package:spotiload/providers/matchingpageprovider.dart';
+import 'package:spotiload/providers/progressprovider.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<InitProvider>(create: (_) => InitProvider()),
     ChangeNotifierProvider<MatchingPageProvider>(create: (_) => MatchingPageProvider()),
+    ChangeNotifierProvider<ProgressProvider>(create: (_) => ProgressProvider()),
   ], child: const MyApp()));
 }
 
@@ -50,6 +53,15 @@ class MyApp extends StatelessWidget {
                   create: (context) => InitProvider(),
                   child: MatchingPage(
                     urlArg: args,
+                  )));
+        } else if (settings.name == ProgressPageManual.routeName) {
+          var args = settings.arguments as Map<String, dynamic>;
+          return MaterialPageRoute(
+              builder: (context) => ChangeNotifierProvider<ProgressProvider>(
+                  create: (context) => ProgressProvider(),
+                  child: ProgressPageManual(
+                    spotifyId: args['spotifyId'],
+                    userId: args['userId'],
                   )));
         }
       },

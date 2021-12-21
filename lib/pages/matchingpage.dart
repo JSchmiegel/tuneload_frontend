@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:spotiload/global.dart';
 import 'package:spotiload/helper/apihelper.dart';
 import 'package:spotiload/pages/homepage.dart';
+import 'package:spotiload/pages/progresspageauto.dart';
+import 'package:spotiload/pages/progresspagemanual.dart';
 import 'package:spotiload/providers/initprovider.dart';
 import 'package:spotiload/providers/matchingpageprovider.dart';
 
@@ -159,7 +161,11 @@ class _MatchingPageState extends State<MatchingPage> {
                                       ),
                                       onPressed: () {
                                         // [ ] todo: right navigation
-                                        Navigator.of(context).popUntil(ModalRoute.withName(HomePage.routeName));
+                                        // Navigator.of(context).popUntil(ModalRoute.withName(HomePage.routeName));
+                                        Navigator.pushNamed(context, ProgressPageManual.routeName, arguments: {
+                                          'spotifyId': providerMatching.matchingResponse.data['matches'][radioGroupValue]['id'],
+                                          'userId': providerInit.initResponse.data['id'],
+                                        });
                                       },
                                     ),
                                   ),
