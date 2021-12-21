@@ -83,13 +83,7 @@ class _MatchingPageState extends State<MatchingPage> {
                 ),
                 body: Consumer<MatchingPageProvider>(
                     builder: (_, providerMatching, __) => providerMatching.isProcessing
-                        ? Center(
-                            child: Column(
-                            children: [
-                              const CircularProgressIndicator(),
-                              Text('Getting possible matchings for ${providerInit.initResponse.data['org_name']}')
-                            ],
-                          ))
+                        ? buildLoadingPage('Getting possible matchings for ${providerInit.initResponse.data['org_name']}')
                         : Container(
                             margin: firstMargin,
                             child: Column(
