@@ -4,10 +4,14 @@ import 'package:spotiload/pages/homepage.dart';
 import 'package:spotiload/pages/matchingpage.dart';
 import 'package:spotiload/pages/progresspage.dart';
 import 'package:spotiload/pages/settingpage.dart';
-import 'package:spotiload/providers/progresspageprovider.dart';
+import 'package:spotiload/providers/initprovider.dart';
+import 'package:spotiload/providers/matchingpageprovider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider<InitProvider>(create: (_) => InitProvider()),
+    ChangeNotifierProvider<MatchingPageProvider>(create: (_) => MatchingPageProvider()),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -28,16 +32,23 @@ class MyApp extends StatelessWidget {
         //       urlArg: '',
         //     )),
         SettingPage.routeName: (context) => const SettingPage(),
-        MatchingPage.routeName: (context) => const MatchingPage(),
+        // MatchingPage.routeName: (context) => const MatchingPage(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == ProgressPage.routeName) {
           final String args = settings.arguments.toString();
-
           return MaterialPageRoute(
-              builder: (context) => ChangeNotifierProvider<ProgressPageProvider>(
-                  create: (context) => ProgressPageProvider(),
+              builder: (context) => ChangeNotifierProvider<InitProvider>(
+                  create: (context) => InitProvider(),
                   child: ProgressPage(
+                    urlArg: args,
+                  )));
+        } else if (settings.name == MatchingPage.routeName) {
+          final String args = settings.arguments.toString();
+          return MaterialPageRoute(
+              builder: (context) => ChangeNotifierProvider<InitProvider>(
+                  create: (context) => InitProvider(),
+                  child: MatchingPage(
                     urlArg: args,
                   )));
         }

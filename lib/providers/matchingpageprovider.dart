@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:spotiload/models/httpresponse.dart';
 
-class ProgressPageProvider extends ChangeNotifier {
+class MatchingPageProvider extends ChangeNotifier {
   bool _isProcessing = true;
   late HTTPResponse _response;
 
@@ -12,9 +12,9 @@ class ProgressPageProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  HTTPResponse get initResponse => _response;
+  HTTPResponse get matchingResponse => _response;
 
-  setInitResponse(HTTPResponse response) {
+  setMatchingResponse(HTTPResponse response) {
     _response = response;
     notifyListeners();
   }

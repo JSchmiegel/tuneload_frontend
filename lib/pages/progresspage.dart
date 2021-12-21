@@ -1,16 +1,11 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spotiload/helper/apihelper.dart';
 import 'package:spotiload/global.dart';
-import 'package:spotiload/providers/progresspageprovider.dart';
+import 'package:spotiload/providers/initprovider.dart';
 
 class ProgressPage extends StatefulWidget {
-  // const ProgressPage({Key? key}) : super(key: key);
-
   final String urlArg;
-
   const ProgressPage({Key? key, required this.urlArg}) : super(key: key);
 
   static const routeName = '/progress';
@@ -36,7 +31,7 @@ class _ProgressPageState extends State<ProgressPage> {
   }
 
   _getInitResponse(urlArg) async {
-    var provider = Provider.of<ProgressPageProvider>(context, listen: false);
+    var provider = Provider.of<InitProvider>(context, listen: false);
     var response = await APIHelper.getInit(urlArg);
     if (response.isSuccessful) {
       provider.setInitResponse(response);
@@ -60,7 +55,7 @@ class _ProgressPageState extends State<ProgressPage> {
         onWillPop: () async => false,
         child: Scaffold(
           // appBar: AppBar(title: const Text('Spotiload')),
-          body: Consumer<ProgressPageProvider>(
+          body: Consumer<InitProvider>(
               builder: (_, provider, __) => provider.isProcessing
                   ? Center(
                       child: Column(
@@ -88,7 +83,6 @@ class _ProgressPageState extends State<ProgressPage> {
                                       value: progress,
                                     ),
                                   ),
-                                  // const Text('Here should be a LinearProgressIndicator'),
                                   IconButton(
                                     icon: Icon(
                                       Icons.close,

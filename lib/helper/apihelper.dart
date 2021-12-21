@@ -67,4 +67,38 @@ class APIHelper {
       );
     }
   }
+
+  static Future<HTTPResponse> getMatchingManual(id) async {
+    String uri = '/spotiload/matching/$id';
+    var headers = {'Accept': 'application/json'};
+    try {
+      http.Response response = await http.get(
+        Uri.http(globalHost, uri),
+        headers: headers,
+      );
+      return HTTPResponse(true, json.decode(response.body), message: 'Request Successful', statusCode: response.statusCode);
+    } on SocketException {
+      print('SOCKET EXCEPTION OCCURRED');
+      return HTTPResponse(
+        false,
+        null,
+        message: 'Unable to reach the internet! Please try again in a moment.',
+      );
+    } on FormatException {
+      print('JSON FORMAT EXCEPTION OCCURRED');
+      return HTTPResponse(
+        false,
+        null,
+        message: 'Invalid data received from the server! Please try again in a moment.',
+      );
+    } catch (e) {
+      print('UNEXPECTED ERROR');
+      print(e.toString());
+      return HTTPResponse(
+        false,
+        null,
+        message: 'Something went wrong! Please try again in a moment!',
+      );
+    }
+  }
 }

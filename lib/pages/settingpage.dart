@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:spotiload/helper/apihelper.dart';
 import 'package:spotiload/global.dart';
 import 'package:spotiload/models/settings.dart';
+import 'package:spotiload/pages/homepage.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -215,7 +216,7 @@ class _SettingPageState extends State<SettingPage> {
                                     onPressed: () {
                                       _callBackendApiPut();
                                       // Navigator.of(context).pop();
-                                      Navigator.of(context).popUntil(ModalRoute.withName('/'));
+                                      Navigator.of(context).popUntil(ModalRoute.withName(HomePage.routeName));
                                     },
                                     child: const Text('Yes')),
                               ],

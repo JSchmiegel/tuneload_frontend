@@ -34,3 +34,25 @@ Widget blankLine = Row(
 
 // api
 const String globalHost = "127.0.0.1:32500";
+
+// Loading Page
+Widget buildLoadingPage(String message) {
+  return Scaffold(
+    body: Center(
+        child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        const CircularProgressIndicator(),
+        SizedBox(
+          width: 500,
+          child: Text(
+            message,
+            style: const TextStyle(color: Colors.black, fontSize: 15),
+            textAlign: TextAlign.center,
+          ),
+        )
+      ],
+    )),
+  );
+}

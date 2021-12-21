@@ -207,7 +207,7 @@ class _HomePageState extends State<HomePage> {
                             Navigator.pushNamed(context, ProgressPage.routeName, arguments: url);
                           } else {
                             // matchingPage
-                            Navigator.pushNamed(context, MatchingPage.routeName);
+                            Navigator.pushNamed(context, MatchingPage.routeName, arguments: url);
                           }
                         },
                       ),
