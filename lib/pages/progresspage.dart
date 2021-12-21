@@ -62,7 +62,10 @@ class _ProgressPageState extends State<ProgressPage> {
           // appBar: AppBar(title: const Text('Spotiload')),
           body: Consumer<ProgressPageProvider>(
               builder: (_, provider, __) => provider.isProcessing
-                  ? const Center(child: CircularProgressIndicator())
+                  ? Center(
+                      child: Column(
+                      children: [const CircularProgressIndicator(), Text('Getting ready to download ${widget.urlArg}')],
+                    ))
                   : Container(
                       margin: firstMargin,
                       child: Column(

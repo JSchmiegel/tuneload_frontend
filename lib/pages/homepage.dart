@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:spotiload/helper/apihelper.dart';
 import 'package:spotiload/global.dart';
 import 'package:spotiload/pages/matchingpage.dart';
+import 'package:spotiload/pages/progresspage.dart';
+import 'package:spotiload/pages/settingpage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,8 +21,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String? url;
   bool? upload = true;
-  bool? deleteJson = true;
-  bool? searchLyrics = true;
+  // bool? deleteJson = true;
+  // bool? searchLyrics = true;
+  bool? autoMatching = false;
 
   Map<String, dynamic>? initResponse;
 
@@ -35,8 +38,8 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
-              // Navigator.pushNamed(context, '/settings');
-              Navigator.pushNamed(context, MatchingPage.routeName);
+              Navigator.pushNamed(context, SettingPage.routeName);
+              // Navigator.pushNamed(context, MatchingPage.routeName);
             },
             splashRadius: buttonSplashRadius,
           )
@@ -102,42 +105,59 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ],
                             ),
+                            // Row(
+                            //   children: [
+                            //     Checkbox(
+                            //         value: searchLyrics,
+                            //         onChanged: (value) {
+                            //           // When the value of the checkbox changes,
+                            //           // update the FormFieldState so the form is
+                            //           // re-validated.
+                            //           formFieldState.didChange(value);
+                            //           setState(() {
+                            //             searchLyrics = value;
+                            //           });
+                            //         },
+                            //         splashRadius: buttonSplashRadius),
+                            //     Text(
+                            //       'search for "... Lyrics"',
+                            //       style: Theme.of(context).textTheme.subtitle1,
+                            //     ),
+                            //   ],
+                            // ),
+                            // Row(
+                            //   children: [
+                            //     Checkbox(
+                            //         value: deleteJson,
+                            //         onChanged: (value) {
+                            //           // When the value of the checkbox changes,
+                            //           // update the FormFieldState so the form is
+                            //           // re-validated.
+                            //           formFieldState.didChange(value);
+                            //           setState(() {
+                            //             deleteJson = value;
+                            //           });
+                            //         },
+                            //         splashRadius: buttonSplashRadius),
+                            //     Text(
+                            //       'delete .json after download',
+                            //       style: Theme.of(context).textTheme.subtitle1,
+                            //     ),
+                            //   ],
+                            // ),
                             Row(
                               children: [
                                 Checkbox(
-                                    value: searchLyrics,
+                                    value: autoMatching,
                                     onChanged: (value) {
-                                      // When the value of the checkbox changes,
-                                      // update the FormFieldState so the form is
-                                      // re-validated.
                                       formFieldState.didChange(value);
                                       setState(() {
-                                        searchLyrics = value;
+                                        autoMatching = value;
                                       });
                                     },
                                     splashRadius: buttonSplashRadius),
                                 Text(
-                                  'search for "... Lyrics"',
-                                  style: Theme.of(context).textTheme.subtitle1,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Checkbox(
-                                    value: deleteJson,
-                                    onChanged: (value) {
-                                      // When the value of the checkbox changes,
-                                      // update the FormFieldState so the form is
-                                      // re-validated.
-                                      formFieldState.didChange(value);
-                                      setState(() {
-                                        deleteJson = value;
-                                      });
-                                    },
-                                    splashRadius: buttonSplashRadius),
-                                Text(
-                                  'delete .json after download',
+                                  'auto matching',
                                   style: Theme.of(context).textTheme.subtitle1,
                                 ),
                               ],
@@ -182,7 +202,13 @@ class _HomePageState extends State<HomePage> {
 //                           );
                           // Map<String, dynamic> response = await _callBackendApiGetInit();
                           // _callBackendApiGetInit();
-                          Navigator.pushNamed(context, '/progress', arguments: url);
+                          if (autoMatching == true) {
+                            // progressPage
+                            Navigator.pushNamed(context, ProgressPage.routeName, arguments: url);
+                          } else {
+                            // matchingPage
+                            Navigator.pushNamed(context, MatchingPage.routeName);
+                          }
                         },
                       ),
                     ),
