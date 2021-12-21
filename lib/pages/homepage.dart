@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:spotiload/helper/apihelper.dart';
 import 'package:spotiload/global.dart';
 import 'package:spotiload/pages/matchingpage.dart';
-import 'package:spotiload/pages/progresspage.dart';
+import 'package:spotiload/pages/progresspageauto.dart';
 import 'package:spotiload/pages/settingpage.dart';
 
 class HomePage extends StatefulWidget {
@@ -204,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                           // _callBackendApiGetInit();
                           if (autoMatching == true) {
                             // progressPage
-                            Navigator.pushNamed(context, ProgressPage.routeName, arguments: url);
+                            Navigator.pushNamed(context, ProgressPageAuto.routeName, arguments: url);
                           } else {
                             // matchingPage
                             Navigator.pushNamed(context, MatchingPage.routeName, arguments: url);

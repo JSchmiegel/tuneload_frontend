@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spotiload/pages/homepage.dart';
 import 'package:spotiload/pages/matchingpage.dart';
-import 'package:spotiload/pages/progresspage.dart';
+import 'package:spotiload/pages/progresspageauto.dart';
 import 'package:spotiload/pages/settingpage.dart';
 import 'package:spotiload/providers/initprovider.dart';
 import 'package:spotiload/providers/matchingpageprovider.dart';
@@ -35,12 +35,12 @@ class MyApp extends StatelessWidget {
         // MatchingPage.routeName: (context) => const MatchingPage(),
       },
       onGenerateRoute: (settings) {
-        if (settings.name == ProgressPage.routeName) {
+        if (settings.name == ProgressPageAuto.routeName) {
           final String args = settings.arguments.toString();
           return MaterialPageRoute(
               builder: (context) => ChangeNotifierProvider<InitProvider>(
                   create: (context) => InitProvider(),
-                  child: ProgressPage(
+                  child: ProgressPageAuto(
                     urlArg: args,
                   )));
         } else if (settings.name == MatchingPage.routeName) {

@@ -4,19 +4,19 @@ import 'package:spotiload/helper/apihelper.dart';
 import 'package:spotiload/global.dart';
 import 'package:spotiload/providers/initprovider.dart';
 
-class ProgressPage extends StatefulWidget {
+class ProgressPageAuto extends StatefulWidget {
   final String urlArg;
-  const ProgressPage({Key? key, required this.urlArg}) : super(key: key);
+  const ProgressPageAuto({Key? key, required this.urlArg}) : super(key: key);
 
   static const routeName = '/progress';
 
   @override
   State<StatefulWidget> createState() {
-    return _ProgressPageState();
+    return _ProgressPageAutoState();
   }
 }
 
-class _ProgressPageState extends State<ProgressPage> {
+class _ProgressPageAutoState extends State<ProgressPageAuto> {
   _showSnackbar(String message, {Color? bgColor}) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -57,10 +57,7 @@ class _ProgressPageState extends State<ProgressPage> {
           // appBar: AppBar(title: const Text('Spotiload')),
           body: Consumer<InitProvider>(
               builder: (_, provider, __) => provider.isProcessing
-                  ? Center(
-                      child: Column(
-                      children: [const CircularProgressIndicator(), Text('Getting ready to download ${widget.urlArg}')],
-                    ))
+                  ? buildLoadingPage('Getting ready to download\n${widget.urlArg}')
                   : Container(
                       margin: firstMargin,
                       child: Column(
