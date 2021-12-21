@@ -100,9 +100,23 @@ class _MatchingPageState extends State<MatchingPage> {
                                             width: pixelwidthRadio,
                                             height: pixelheightRadio,
                                             child: ListTile(
-                                              title: Text(
-                                                  '${providerMatching.matchingResponse.data['matches'][i]['album']} (${providerMatching.matchingResponse.data['matches'][i]['num_of_songs']} songs)',
-                                                  style: Theme.of(context).textTheme.subtitle1),
+                                              title: Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    '${providerMatching.matchingResponse.data['matches'][i]['album']} - ${providerMatching.matchingResponse.data['matches'][i]['album_artist']}',
+                                                    style: Theme.of(context).textTheme.subtitle1,
+                                                  ),
+                                                  const Spacer(
+                                                    flex: 3,
+                                                  ),
+                                                  Text(
+                                                    '(${providerMatching.matchingResponse.data['matches'][i]['num_of_songs']} songs)',
+                                                    style: const TextStyle(color: Colors.black, fontSize: 12),
+                                                  )
+                                                ],
+                                              ),
                                               leading: Radio<int>(
                                                 groupValue: radioGroupValue,
                                                 value: i,
