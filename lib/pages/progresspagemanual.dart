@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:spotiload/helper/apihelper.dart';
 import 'package:spotiload/global.dart';
 import 'package:spotiload/pages/homepage.dart';
-import 'package:spotiload/providers/progressprovider.dart';
+import 'package:spotiload/providers/progresspagemanualprovider.dart';
 
 class ProgressPageManual extends StatefulWidget {
   final String spotifyId;
@@ -33,10 +33,10 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
   }
 
   _getProgressResponse(userId, spotifyIdArg) async {
-    var provider = Provider.of<ProgressProvider>(context, listen: false);
+    var provider = Provider.of<ProgressPageManualProvider>(context, listen: false);
     var response = await APIHelper.putMatching(userId, spotifyIdArg);
     if (response.isSuccessful) {
-      provider.setProgressResponse(response);
+      provider.setProgressManualResponse(response);
     } else {
       _showSnackbar(response.statusCode.toString());
     }
@@ -54,7 +54,7 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
     double progress = 1;
 
     return Scaffold(
-      body: Consumer<ProgressProvider>(
+      body: Consumer<ProgressPageManualProvider>(
           builder: (_, provider, __) => provider.isProcessing
               ? buildLoadingPage('Getting ready to download\n${widget.spotifyId}')
               : Container(
@@ -63,7 +63,7 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                          'Progress of downloading "${provider.progressResponse.data['org_name']}" (${provider.progressResponse.data['songs'].length} songs):',
+                          'Progress of downloading "${provider.progressManualResponse.data['org_name']}" (${provider.progressManualResponse.data['songs'].length} songs):',
                           style: styleText),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
