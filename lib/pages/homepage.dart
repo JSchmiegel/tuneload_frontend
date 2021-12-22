@@ -72,6 +72,7 @@ class _HomePageState extends State<HomePage> {
                   onChanged: (value) {
                     url = value;
                   },
+                  // trigger button with enter key
                 ),
                 const Spacer(
                   flex: 2,

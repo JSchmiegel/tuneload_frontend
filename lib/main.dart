@@ -8,12 +8,14 @@ import 'package:spotiload/pages/settingpage.dart';
 import 'package:spotiload/providers/initprovider.dart';
 import 'package:spotiload/providers/matchingpageprovider.dart';
 import 'package:spotiload/providers/progresspagemanualprovider.dart';
+import 'package:spotiload/providers/progressprovider.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<InitProvider>(create: (_) => InitProvider()),
     ChangeNotifierProvider<MatchingPageProvider>(create: (_) => MatchingPageProvider()),
     ChangeNotifierProvider<ProgressPageManualProvider>(create: (_) => ProgressPageManualProvider()),
+    ChangeNotifierProvider<ProgressProvider>(create: (_) => ProgressProvider()),
   ], child: const MyApp()));
 }
 

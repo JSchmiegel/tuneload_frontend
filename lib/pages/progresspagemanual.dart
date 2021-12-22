@@ -4,6 +4,8 @@ import 'package:spotiload/helper/apihelper.dart';
 import 'package:spotiload/global.dart';
 import 'package:spotiload/pages/homepage.dart';
 import 'package:spotiload/providers/progresspagemanualprovider.dart';
+import 'package:spotiload/providers/progressprovider.dart';
+import "package:intl/intl.dart";
 
 class ProgressPageManual extends StatefulWidget {
   final String spotifyId;
@@ -32,30 +34,45 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
   }
 
-  _getProgressResponse(userId, spotifyIdArg) async {
+  _getProgressPageManualResponse(String userId, String spotifyIdArg) async {
     var provider = Provider.of<ProgressPageManualProvider>(context, listen: false);
     var response = await APIHelper.putMatching(userId, spotifyIdArg);
     if (response.isSuccessful) {
       provider.setProgressManualResponse(response);
+      _getProgressResponse(userId, response.data['songs']);
     } else {
       _showSnackbar(response.statusCode.toString());
     }
     provider.setIsProcessing(false);
   }
 
+  _getProgressResponse(String userId, List<dynamic> songs) async {
+    var provider = Provider.of<ProgressProvider>(context, listen: false);
+    for (var i = 0; i < songs.length; i++) {
+      var response = await APIHelper.getDownload(userId, i.toString());
+      if (response.isSuccessful) {
+        provider.setProgressResponse(response, i);
+      } else {
+        _showSnackbar(response.statusCode.toString());
+      }
+      provider.setIsProcessing(false);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    _getProgressResponse(widget.userId, widget.spotifyId);
+    _getProgressPageManualResponse(widget.userId, widget.spotifyId);
   }
 
   @override
   Widget build(BuildContext context) {
     double progress = 1;
+    var f = NumberFormat("#0.0#", "en_US");
 
     return Scaffold(
       body: Consumer<ProgressPageManualProvider>(
-          builder: (_, provider, __) => provider.isProcessing
+          builder: (_, providerProgressManual, __) => providerProgressManual.isProcessing
               ? buildLoadingPage('Getting ready to download\n${widget.spotifyId}')
               : Container(
                   margin: firstMargin,
@@ -63,57 +80,115 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                          'Progress of downloading "${provider.progressManualResponse.data['org_name']}" (${provider.progressManualResponse.data['songs'].length} songs):',
+                          'Progress of downloading "${providerProgressManual.progressManualResponse.data['org_name']}" (${providerProgressManual.progressManualResponse.data['songs'].length} songs):',
                           style: styleText),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Text('Doing blablabla ....'),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              SizedBox(
-                                width: 500,
-                                child: LinearProgressIndicator(
-                                  value: progress,
-                                ),
-                              ),
-                              IconButton(
-                                icon: Icon(
-                                  Icons.close,
-                                  color: redColor,
-                                ),
-                                onPressed: () {
-                                  showDialog<void>(
-                                    context: context,
-                                    builder: (context) => AlertDialog(
-                                      title: const Text('Please Confirm'),
-                                      content: const Text('Are you sure to cancel the download?'),
-                                      actions: [
-                                        TextButton(
-                                            onPressed: () {
-                                              // Close the dialog
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: const Text('No')),
-                                        TextButton(
-                                            onPressed: () {
-                                              // Close the dialog
-                                              Navigator.of(context).popUntil(ModalRoute.withName(HomePage.routeName));
-                                            },
-                                            child: const Text('Yes')),
-                                      ],
-                                    ),
-                                  );
-                                },
-                                splashRadius: buttonSplashRadius,
+                      Consumer<ProgressProvider>(
+                        builder: (_, providerProgress, __) => providerProgress.isProcessing
+                            // page before first notification from provider
+                            ? Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                      'Downloading and Tagging "${providerProgressManual.progressManualResponse.data['songs'][0]['title']}.mp3" ...'),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      SizedBox(
+                                        width: 500,
+                                        child: LinearProgressIndicator(
+                                          value: ((1) / (providerProgressManual.progressManualResponse.data['songs'].length + 1)),
+                                        ),
+                                      ),
+                                      IconButton(
+                                        icon: Icon(
+                                          Icons.close,
+                                          color: redColor,
+                                        ),
+                                        onPressed: () {
+                                          showDialog<void>(
+                                            context: context,
+                                            builder: (context) => AlertDialog(
+                                              title: const Text('Please Confirm'),
+                                              content: const Text('Are you sure to cancel the download?'),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: () {
+                                                      // Close the dialog
+                                                      Navigator.of(context).pop();
+                                                    },
+                                                    child: const Text('No')),
+                                                TextButton(
+                                                    onPressed: () {
+                                                      // Close the dialog
+                                                      Navigator.of(context).popUntil(ModalRoute.withName(HomePage.routeName));
+                                                    },
+                                                    child: const Text('Yes')),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                        splashRadius: buttonSplashRadius,
+                                      )
+                                    ],
+                                  ),
+                                  Text('${f.format(((1) / (providerProgressManual.progressManualResponse.data['songs'].length + 1)) * 100)} %'),
+                                ],
                               )
-                            ],
-                          ),
-                          Text('${progress * 100} %')
-                        ],
-                      ),
+                            // page after first notification from provider
+                            : Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                      'Downloading and Tagging "${providerProgressManual.progressManualResponse.data['songs'][providerProgress.progressResponse.index]['title']}.mp3"'),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      SizedBox(
+                                        width: 500,
+                                        child: LinearProgressIndicator(
+                                          value: ((providerProgress.progressResponse.index + 1) /
+                                              (providerProgressManual.progressManualResponse.data['songs'].length + 1)),
+                                        ),
+                                      ),
+                                      IconButton(
+                                        icon: Icon(
+                                          Icons.close,
+                                          color: redColor,
+                                        ),
+                                        onPressed: () {
+                                          showDialog<void>(
+                                            context: context,
+                                            builder: (context) => AlertDialog(
+                                              title: const Text('Please Confirm'),
+                                              content: const Text('Are you sure to cancel the download?'),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: () {
+                                                      // Close the dialog
+                                                      Navigator.of(context).pop();
+                                                    },
+                                                    child: const Text('No')),
+                                                TextButton(
+                                                    onPressed: () {
+                                                      // Close the dialog
+                                                      Navigator.of(context).popUntil(ModalRoute.withName(HomePage.routeName));
+                                                    },
+                                                    child: const Text('Yes')),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                        splashRadius: buttonSplashRadius,
+                                      )
+                                    ],
+                                  ),
+                                  Text(
+                                      '${f.format(((providerProgress.progressResponse.index + 1) / (providerProgressManual.progressManualResponse.data['songs'].length + 1)) * 100)} %')
+                                ],
+                              ),
+                      )
                     ],
                   ))),
     );
