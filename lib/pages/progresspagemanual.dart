@@ -65,8 +65,11 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
         _showSnackbar(response.statusCode.toString());
       }
       provider.setIsProcessing(false);
-      Navigator.pushNamed(context, FinishPage.routeName);
     }
+    if (uplaoding!) {
+      await APIHelper.putUpload(userId);
+    }
+    Navigator.pushNamed(context, FinishPage.routeName);
   }
 
   @override
@@ -78,6 +81,10 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
   @override
   Widget build(BuildContext context) {
     var f = NumberFormat("#0.0#", "en_US");
+    double addProgress = 0;
+    if (uplaoding!) {
+      addProgress = 1;
+    }
 
     return Scaffold(
       body: Consumer<ProgressPageManualProvider>(
@@ -118,7 +125,7 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                                       SizedBox(
                                         width: 500,
                                         child: LinearProgressIndicator(
-                                          value: ((1) / (providerProgressManual.progressManualResponse.data['songs'].length + 1)),
+                                          value: ((1) / (providerProgressManual.progressManualResponse.data['songs'].length + addProgress)),
                                         ),
                                       ),
                                       IconButton(
@@ -153,7 +160,8 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                                       )
                                     ],
                                   ),
-                                  Text('${f.format(((1) / (providerProgressManual.progressManualResponse.data['songs'].length + 1)) * 100)} %'),
+                                  Text(
+                                      '${f.format(((1) / (providerProgressManual.progressManualResponse.data['songs'].length + addProgress)) * 100)} %'),
                                 ],
                               )
                             // page after first notification from provider
@@ -167,9 +175,20 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                                     children: [
                                       LayoutBuilder(builder: (context, constraints) {
                                         if (providerProgress.progressResponse.index + 1 >=
-                                            providerProgressManual.progressManualResponse.data['songs'].length) {
-                                          // if not uploading!
-                                          return const Text('ende');
+                                                providerProgressManual.progressManualResponse.data['songs'].length &&
+                                            uplaoding!) {
+                                          return Row(
+                                            children: const [
+                                              Text('Uploading songs'),
+                                              SizedBox(
+                                                width: 7,
+                                              ),
+                                              JumpingDotsProgressIndicator(
+                                                numberOfDots: 3,
+                                                fontSize: 20.0,
+                                              ),
+                                            ],
+                                          );
                                         } else {
                                           return Row(
                                             children: [
@@ -195,8 +214,8 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                                       SizedBox(
                                         width: 500,
                                         child: LinearProgressIndicator(
-                                          value: ((providerProgress.progressResponse.index + 1) /
-                                              (providerProgressManual.progressManualResponse.data['songs'].length + 1)),
+                                          value: ((providerProgress.progressResponse.index + 2) /
+                                              (providerProgressManual.progressManualResponse.data['songs'].length + addProgress)),
                                         ),
                                       ),
                                       IconButton(
@@ -233,7 +252,7 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                                     ],
                                   ),
                                   Text(
-                                      '${f.format(((providerProgress.progressResponse.index + 1) / (providerProgressManual.progressManualResponse.data['songs'].length + 1)) * 100)} %')
+                                      '${f.format(((providerProgress.progressResponse.index + 2) / (providerProgressManual.progressManualResponse.data['songs'].length + addProgress)) * 100)} %')
                                 ],
                               ),
                       )

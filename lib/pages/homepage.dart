@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String? url;
-  bool? upload = true;
+  // bool? upload = true;
   // bool? deleteJson = true;
   // bool? searchLyrics = true;
   bool? autoMatching = false;
@@ -86,14 +86,14 @@ class _HomePageState extends State<HomePage> {
                             Row(
                               children: [
                                 Checkbox(
-                                    value: upload,
+                                    value: uplaoding,
                                     onChanged: (value) {
                                       // When the value of the checkbox changes,
                                       // update the FormFieldState so the form is
                                       // re-validated.
                                       formFieldState.didChange(value);
                                       setState(() {
-                                        upload = value;
+                                        uplaoding = value;
                                       });
                                     },
                                     splashRadius: buttonSplashRadius),

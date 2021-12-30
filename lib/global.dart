@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+// uplaoding?
+bool? uplaoding = true;
+
 const firstMargin = EdgeInsets.all(33);
 double buttonSplashRadius = 15;
 final greenColor = Colors.green[500];

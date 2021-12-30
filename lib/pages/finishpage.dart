@@ -44,7 +44,7 @@ class FinishPage extends StatelessWidget {
                       style: styleButton,
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, HomePage.routeName);
+                      Navigator.pushReplacementNamed(context, HomePage.routeName);
                     },
                   ),
                 ),
