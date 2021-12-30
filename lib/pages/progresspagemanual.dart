@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spotiload/helper/apihelper.dart';
 import 'package:spotiload/global.dart';
+import 'package:spotiload/models/jumpingdotsindicator.dart';
 import 'package:spotiload/pages/homepage.dart';
 import 'package:spotiload/providers/progresspagemanualprovider.dart';
 import 'package:spotiload/providers/progressprovider.dart';
@@ -89,8 +90,20 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Text(
-                                      'Downloading and Tagging "${providerProgressManual.progressManualResponse.data['songs'][0]['title']}.mp3" ...'),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                          'Downloading and Tagging "${providerProgressManual.progressManualResponse.data['songs'][0]['title']}.mp3"'),
+                                      const SizedBox(
+                                        width: 7,
+                                      ),
+                                      const JumpingDotsProgressIndicator(
+                                        numberOfDots: 3,
+                                        fontSize: 20.0,
+                                      ),
+                                    ],
+                                  ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     children: [
@@ -140,8 +153,33 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Text(
-                                      'Downloading and Tagging "${providerProgressManual.progressManualResponse.data['songs'][providerProgress.progressResponse.index]['title']}.mp3"'),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      LayoutBuilder(builder: (context, constraints) {
+                                        if (providerProgress.progressResponse.index + 1 >
+                                            providerProgressManual.progressManualResponse.data['songs'].length) {
+                                          return const Text('ende');
+                                        } else {
+                                          return Row(
+                                            children: [
+                                              Text(
+                                                  'Downloading and Tagging "${providerProgressManual.progressManualResponse.data['songs'][providerProgress.progressResponse.index + 1]['title']}.mp3"'),
+                                              const SizedBox(
+                                                width: 7,
+                                              ),
+                                              const JumpingDotsProgressIndicator(
+                                                numberOfDots: 3,
+                                                fontSize: 20.0,
+                                              ),
+                                            ],
+                                          );
+                                        }
+                                      })
+                                      // const SizedBox(height: 10, width: 10, child: CircularProgressIndicator()),
+                                    ],
+                                  ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     children: [
