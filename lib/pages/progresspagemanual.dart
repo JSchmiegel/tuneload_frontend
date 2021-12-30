@@ -11,6 +11,8 @@ import "package:intl/intl.dart";
 class ProgressPageManual extends StatefulWidget {
   final String spotifyId;
   final String userId;
+
+  // bool cancel;
   const ProgressPageManual({Key? key, required this.spotifyId, required this.userId}) : super(key: key);
 
   static const routeName = '/progressmanual';
@@ -22,6 +24,8 @@ class ProgressPageManual extends StatefulWidget {
 }
 
 class _ProgressPageManualState extends State<ProgressPageManual> {
+  bool cancel = false;
+
   _showSnackbar(String message, {Color? bgColor}) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -50,6 +54,9 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
   _getProgressResponse(String userId, List<dynamic> songs) async {
     var provider = Provider.of<ProgressProvider>(context, listen: false);
     for (var i = 0; i < songs.length; i++) {
+      if (cancel) {
+        break;
+      }
       var response = await APIHelper.getDownload(userId, i.toString());
       if (response.isSuccessful) {
         provider.setProgressResponse(response, i);
@@ -68,7 +75,6 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
 
   @override
   Widget build(BuildContext context) {
-    double progress = 1;
     var f = NumberFormat("#0.0#", "en_US");
 
     return Scaffold(
@@ -211,6 +217,7 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                                                 TextButton(
                                                     onPressed: () {
                                                       // Close the dialog
+                                                      cancel = true;
                                                       Navigator.of(context).popUntil(ModalRoute.withName(HomePage.routeName));
                                                     },
                                                     child: const Text('Yes')),
