@@ -27,6 +27,12 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    super.initState();
+    uplaoding = true;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -50,7 +56,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextFormField(
-                  autofocus: true,
+                  // autofocus: true,
                   textInputAction: TextInputAction.next,
                   validator: (value) {
                     String pattern = r'^https?:\/\/((open.spotify.com\/(playlist|album)\/)|((www.youtube.com)\/(playlist\?list|watch\?.*list)))';
@@ -69,7 +75,16 @@ class _HomePageState extends State<HomePage> {
                   onChanged: (value) {
                     url = value;
                   },
-                  // trigger button with enter key
+                  onFieldSubmitted: (value) {
+                    url = value;
+                    if (autoMatching == true) {
+                      // progressPage
+                      Navigator.pushNamed(context, ProgressPageAuto.routeName, arguments: url);
+                    } else {
+                      // matchingPage
+                      Navigator.pushNamed(context, MatchingPage.routeName, arguments: url);
+                    }
+                  },
                 ),
                 const Spacer(
                   flex: 2,
@@ -78,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     FormField<bool>(
-                      initialValue: true,
+                      initialValue: uplaoding,
                       builder: (formFieldState) {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

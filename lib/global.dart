@@ -34,6 +34,7 @@ Widget blankLine = Row(
     ),
   ],
 );
+const styleButtonManualMatch = TextStyle(color: Colors.black, fontSize: 12);
 
 // api
 const String globalHost = "127.0.0.1:32500";

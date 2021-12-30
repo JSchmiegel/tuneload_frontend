@@ -66,10 +66,12 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
       }
       provider.setIsProcessing(false);
     }
-    if (uplaoding!) {
-      await APIHelper.putUpload(userId);
+    if (cancel == false) {
+      if (uplaoding!) {
+        await APIHelper.putUpload(userId);
+      }
+      Navigator.pushReplacementNamed(context, FinishPage.routeName);
     }
-    Navigator.pushNamed(context, FinishPage.routeName);
   }
 
   @override
@@ -108,8 +110,7 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text(
-                                          'Downloading and Tagging "${providerProgressManual.progressManualResponse.data['songs'][0]['title']}.mp3"'),
+                                      Text('Downloading and Tagging "${providerProgressManual.progressManualResponse.data['songs'][0]['title']}"'),
                                       const SizedBox(
                                         width: 7,
                                       ),
@@ -128,36 +129,7 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                                           value: ((1) / (providerProgressManual.progressManualResponse.data['songs'].length + addProgress)),
                                         ),
                                       ),
-                                      IconButton(
-                                        icon: Icon(
-                                          Icons.close,
-                                          color: redColor,
-                                        ),
-                                        onPressed: () {
-                                          showDialog<void>(
-                                            context: context,
-                                            builder: (context) => AlertDialog(
-                                              title: const Text('Please Confirm'),
-                                              content: const Text('Are you sure to cancel the download?'),
-                                              actions: [
-                                                TextButton(
-                                                    onPressed: () {
-                                                      // Close the dialog
-                                                      Navigator.of(context).pop();
-                                                    },
-                                                    child: const Text('No')),
-                                                TextButton(
-                                                    onPressed: () {
-                                                      // Close the dialog
-                                                      Navigator.of(context).popUntil(ModalRoute.withName(HomePage.routeName));
-                                                    },
-                                                    child: const Text('Yes')),
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                        splashRadius: buttonSplashRadius,
-                                      )
+                                      createCancelButton(),
                                     ],
                                   ),
                                   Text(
@@ -189,11 +161,14 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                                               ),
                                             ],
                                           );
+                                        } else if (providerProgress.progressResponse.index + 1 >=
+                                            providerProgressManual.progressManualResponse.data['songs'].length) {
+                                          return Container();
                                         } else {
                                           return Row(
                                             children: [
                                               Text(
-                                                  'Downloading and Tagging "${providerProgressManual.progressManualResponse.data['songs'][providerProgress.progressResponse.index + 1]['title']}.mp3"'),
+                                                  'Downloading and Tagging "${providerProgressManual.progressManualResponse.data['songs'][providerProgress.progressResponse.index + 1]['title']}"'),
                                               const SizedBox(
                                                 width: 7,
                                               ),
@@ -218,37 +193,7 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                                               (providerProgressManual.progressManualResponse.data['songs'].length + addProgress)),
                                         ),
                                       ),
-                                      IconButton(
-                                        icon: Icon(
-                                          Icons.close,
-                                          color: redColor,
-                                        ),
-                                        onPressed: () {
-                                          showDialog<void>(
-                                            context: context,
-                                            builder: (context) => AlertDialog(
-                                              title: const Text('Please Confirm'),
-                                              content: const Text('Are you sure to cancel the download?'),
-                                              actions: [
-                                                TextButton(
-                                                    onPressed: () {
-                                                      // Close the dialog
-                                                      Navigator.of(context).pop();
-                                                    },
-                                                    child: const Text('No')),
-                                                TextButton(
-                                                    onPressed: () {
-                                                      // Close the dialog
-                                                      cancel = true;
-                                                      Navigator.of(context).popUntil(ModalRoute.withName(HomePage.routeName));
-                                                    },
-                                                    child: const Text('Yes')),
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                        splashRadius: buttonSplashRadius,
-                                      )
+                                      createCancelButton(),
                                     ],
                                   ),
                                   Text(
@@ -258,6 +203,43 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                       )
                     ],
                   ))),
+    );
+  }
+
+  Widget createCancelButton() {
+    return IconButton(
+      icon: Icon(
+        Icons.close,
+        color: redColor,
+      ),
+      onPressed: () {
+        showDialog<void>(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Please Confirm'),
+            content: const Text('Are you sure to cancel the download?'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    // Close the dialog
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('No')),
+              TextButton(
+                  onPressed: () {
+                    cancel = true;
+                    Navigator.pushAndRemoveUntil<void>(
+                      context,
+                      MaterialPageRoute<void>(builder: (BuildContext context) => const HomePage()),
+                      (Route<dynamic> route) => false,
+                    );
+                  },
+                  child: const Text('Yes')),
+            ],
+          ),
+        );
+      },
+      splashRadius: buttonSplashRadius,
     );
   }
 }

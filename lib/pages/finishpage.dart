@@ -44,7 +44,11 @@ class FinishPage extends StatelessWidget {
                       style: styleButton,
                     ),
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, HomePage.routeName);
+                      Navigator.pushAndRemoveUntil<void>(
+                        context,
+                        MaterialPageRoute<void>(builder: (BuildContext context) => const HomePage()),
+                        (Route<dynamic> route) => false,
+                      );
                     },
                   ),
                 ),

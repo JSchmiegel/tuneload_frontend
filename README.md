@@ -26,7 +26,7 @@
 
 ## *To-do Errors:*
 - [ ] when there is no found video -> youtube find everytime a video -> False (in 99% but there are cases where youtube doesn't find a video! (e.g. d384a25e-14d0-474e-8bc7-92c186bd6b31))
-- [ ] api connection not possible
+- [ ]!!!! api connection not possible
 - [ ] api quota is exceeded
 - [ ] can't write/read files
 - [ ] wrong link
