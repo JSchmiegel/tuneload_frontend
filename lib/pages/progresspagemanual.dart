@@ -158,7 +158,7 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       LayoutBuilder(builder: (context, constraints) {
-                                        if (providerProgress.progressResponse.index + 1 >
+                                        if (providerProgress.progressResponse.index + 1 >=
                                             providerProgressManual.progressManualResponse.data['songs'].length) {
                                           return const Text('ende');
                                         } else {
