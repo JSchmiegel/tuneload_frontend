@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:spotiload/helper/apihelper.dart';
 import 'package:spotiload/global.dart';
 import 'package:spotiload/models/jumpingdotsindicator.dart';
+import 'package:spotiload/pages/finishpage.dart';
 import 'package:spotiload/pages/homepage.dart';
 import 'package:spotiload/providers/progresspagemanualprovider.dart';
 import 'package:spotiload/providers/progressprovider.dart';
@@ -64,6 +65,7 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
         _showSnackbar(response.statusCode.toString());
       }
       provider.setIsProcessing(false);
+      Navigator.pushNamed(context, FinishPage.routeName);
     }
   }
 
@@ -166,6 +168,7 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                                       LayoutBuilder(builder: (context, constraints) {
                                         if (providerProgress.progressResponse.index + 1 >=
                                             providerProgressManual.progressManualResponse.data['songs'].length) {
+                                          // if not uploading!
                                           return const Text('ende');
                                         } else {
                                           return Row(

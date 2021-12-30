@@ -9,6 +9,7 @@ import 'package:spotiload/providers/initprovider.dart';
 import 'package:spotiload/providers/matchingpageprovider.dart';
 import 'package:spotiload/providers/progresspagemanualprovider.dart';
 import 'package:spotiload/providers/progressprovider.dart';
+import 'pages/finishpage.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         //     )),
         SettingPage.routeName: (context) => const SettingPage(),
         // MatchingPage.routeName: (context) => const MatchingPage(),
+        FinishPage.routeName: (context) => const FinishPage(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == ProgressPageAuto.routeName) {

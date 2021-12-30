@@ -56,3 +56,6 @@ Widget buildLoadingPage(String message) {
     )),
   );
 }
+
+// finishpage
+const styleTextFinish = TextStyle(color: Colors.black, fontSize: 35);
