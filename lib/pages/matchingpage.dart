@@ -122,15 +122,15 @@ class _MatchingPageState extends State<MatchingPage> {
                                               height: pixelheightRadio,
                                               child: ListTile(
                                                 title: Row(
-                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                   crossAxisAlignment: CrossAxisAlignment.center,
                                                   children: [
-                                                    Text(
-                                                      '${providerMatching.matchingResponse.data['matches'][i]['album']} - ${providerMatching.matchingResponse.data['matches'][i]['album_artist']}',
-                                                      style: Theme.of(context).textTheme.subtitle1,
-                                                    ),
-                                                    const Spacer(
-                                                      flex: 3,
+                                                    Expanded(
+                                                      child: Text(
+                                                        '${providerMatching.matchingResponse.data['matches'][i]['album']} - ${providerMatching.matchingResponse.data['matches'][i]['album_artist']}',
+                                                        style: Theme.of(context).textTheme.subtitle1,
+                                                        overflow: TextOverflow.ellipsis,
+                                                      ),
                                                     ),
                                                     Text(
                                                       '(${providerMatching.matchingResponse.data['matches'][i]['num_of_songs']} songs)',
@@ -210,7 +210,6 @@ class _MatchingPageState extends State<MatchingPage> {
                                           builder: (context) => AlertDialog(
                                             title: const Text('Please insert Matching'),
                                             content: TextFormField(
-                                                // autofocus: true,
                                                 textInputAction: TextInputAction.next,
                                                 validator: (value) {
                                                   String pattern = r'^https?:\/\/((open.spotify.com\/(playlist|album)\/))';

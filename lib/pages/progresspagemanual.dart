@@ -83,7 +83,7 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
   @override
   Widget build(BuildContext context) {
     var f = NumberFormat("#0.0#", "en_US");
-    double addProgress = 0;
+    int addProgress = 0;
     if (uplaoding!) {
       addProgress = 1;
     }
@@ -132,8 +132,7 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                                       createCancelButton(),
                                     ],
                                   ),
-                                  Text(
-                                      '${f.format(((1) / (providerProgressManual.progressManualResponse.data['songs'].length + addProgress)) * 100)} %'),
+                                  Text('Process:  ${1}/${providerProgressManual.progressManualResponse.data['songs'].length + addProgress}'),
                                 ],
                               )
                             // page after first notification from provider
@@ -180,7 +179,6 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                                           );
                                         }
                                       })
-                                      // const SizedBox(height: 10, width: 10, child: CircularProgressIndicator()),
                                     ],
                                   ),
                                   Row(
@@ -197,7 +195,8 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                                     ],
                                   ),
                                   Text(
-                                      '${f.format(((providerProgress.progressResponse.index + 2) / (providerProgressManual.progressManualResponse.data['songs'].length + addProgress)) * 100)} %')
+                                      'Process:  ${providerProgress.progressResponse.index + 2}/${providerProgressManual.progressManualResponse.data['songs'].length + addProgress}'),
+                                  // 'Process: ${providerProgress.progressResponse.index + 2}/${providerProgressManual.progressManualResponse.data['songs'].length + addProgress} (${f.format(((providerProgress.progressResponse.index + 2 ) / (providerProgressManual.progressManualResponse.data['songs'].length + addProgress)) * 100)}%)'),
                                 ],
                               ),
                       )
