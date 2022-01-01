@@ -29,6 +29,7 @@ class FinishPage extends StatelessWidget {
                 )
               ],
             ),
+            // IDEA [ ] insert image of playlist and finish overview
             const Spacer(
               flex: 1,
             ),
