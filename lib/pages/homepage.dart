@@ -59,7 +59,8 @@ class _HomePageState extends State<HomePage> {
                   // autofocus: true,
                   textInputAction: TextInputAction.next,
                   validator: (value) {
-                    String pattern = r'^https?:\/\/((open.spotify.com\/(playlist|album)\/)|((www.youtube.com)\/(playlist\?list|watch\?.*list)))';
+                    String pattern =
+                        r'^https?:\/\/((open\.spotify\.com\/(playlist|album)\/)|((www\.youtube\.com)\/(playlist\?list|watch\?.*list))|(test\.dummy))';
                     RegExp regex = RegExp(pattern);
                     if (value!.isEmpty) {
                       return 'Please enter an url.';
