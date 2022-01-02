@@ -33,7 +33,7 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
         content: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(message),
+            Expanded(child: Text(message)),
             Container(
               decoration: BoxDecoration(border: Border.all(width: 1.5, color: HexColor("#b71b1c")), borderRadius: BorderRadius.circular(30)),
               height: 25,
