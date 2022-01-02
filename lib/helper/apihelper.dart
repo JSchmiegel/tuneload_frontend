@@ -118,7 +118,20 @@ class APIHelper {
         headers: headers,
         body: body,
       );
-      return HTTPResponse(true, json.decode(response.body), message: 'Request Successful', statusCode: response.statusCode);
+      if (response.statusCode != 200) {
+        return HTTPResponse(
+          false,
+          null,
+          message: json.decode(response.body),
+          statusCode: response.statusCode,
+        );
+      }
+      return HTTPResponse(
+        true,
+        json.decode(response.body),
+        message: 'Request Successful',
+        statusCode: response.statusCode,
+      );
     } on SocketException {
       print('SOCKET EXCEPTION OCCURRED');
       return HTTPResponse(
@@ -140,6 +153,7 @@ class APIHelper {
         false,
         null,
         message: 'Something went wrong! Please try again in a moment!',
+        statusCode: 500,
       );
     }
   }

@@ -7,7 +7,7 @@ import 'package:spotiload/pages/finishpage.dart';
 import 'package:spotiload/pages/homepage.dart';
 import 'package:spotiload/providers/progresspagemanualprovider.dart';
 import 'package:spotiload/providers/progressprovider.dart';
-import "package:intl/intl.dart";
+import 'package:hexcolor/hexcolor.dart';
 
 class ProgressPageManual extends StatefulWidget {
   final String spotifyId;
@@ -30,8 +30,52 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
   _showSnackbar(String message, {Color? bgColor}) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(message),
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(message),
+            Container(
+              decoration: BoxDecoration(border: Border.all(width: 1.5, color: HexColor("#b71b1c")), borderRadius: BorderRadius.circular(30)),
+              height: 25,
+              child: TextButton(
+                child: const Text(
+                  'Cancel Downloading',
+                  style: styleButtonManualMatch,
+                ),
+                onPressed: () {
+                  showDialog<void>(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Please Confirm'),
+                      content: const Text('Are you sure to cancel the download?'),
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              // Close the dialog
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('No')),
+                        TextButton(
+                            onPressed: () {
+                              cancel = true;
+                              _hideSnackbar();
+                              Navigator.pushAndRemoveUntil<void>(
+                                context,
+                                MaterialPageRoute<void>(builder: (BuildContext context) => const HomePage()),
+                                (Route<dynamic> route) => false,
+                              );
+                            },
+                            child: const Text('Yes')),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
         backgroundColor: bgColor ?? Colors.red,
+        duration: const Duration(days: 365),
       ),
     );
   }
@@ -46,10 +90,10 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
     if (response.isSuccessful) {
       provider.setProgressManualResponse(response);
       _getProgressResponse(userId, response.data['songs']);
+      provider.setIsProcessing(false);
     } else {
-      _showSnackbar(response.statusCode.toString());
+      _showSnackbar('${response.statusCode.toString()}: ${response.message}');
     }
-    provider.setIsProcessing(false);
   }
 
   _getProgressResponse(String userId, List<dynamic> songs) async {
@@ -82,7 +126,7 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
 
   @override
   Widget build(BuildContext context) {
-    var f = NumberFormat("#0.0#", "en_US");
+    // var f = NumberFormat("#0.0#", "en_US");
     int addProgress = 0;
     if (uplaoding!) {
       addProgress = 1;
