@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:spotiload/models/finishresponse.dart';
 import 'package:spotiload/models/httpresponse.dart';
 
 class FinishPageProvider extends ChangeNotifier {
   bool _isProcessing = true;
-  late FinishResponseObj _response;
+  late HTTPResponse _response;
 
   bool get isProcessing => _isProcessing;
 
@@ -13,10 +12,10 @@ class FinishPageProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  FinishResponseObj get progressResponse => _response;
+  HTTPResponse get progressResponse => _response;
 
-  setFinishResponse(HTTPResponse response, int index) {
-    _response = FinishResponseObj(response, index);
+  setFinishResponse(HTTPResponse response) {
+    _response = response;
     notifyListeners();
   }
 }
