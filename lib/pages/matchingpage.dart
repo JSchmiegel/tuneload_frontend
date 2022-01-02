@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spotiload/global.dart';
 import 'package:spotiload/helper/apihelper.dart';
+import 'package:spotiload/pages/errormatchingpage.dart';
 import 'package:spotiload/pages/homepage.dart';
 import 'package:spotiload/pages/progresspageauto.dart';
 import 'package:spotiload/pages/progresspagemanual.dart';
@@ -23,28 +24,16 @@ class MatchingPage extends StatefulWidget {
 class _MatchingPageState extends State<MatchingPage> {
   int? radioGroupValue;
 
-  _showSnackbar(String message, {Color? bgColor}) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        backgroundColor: bgColor ?? Colors.red,
-      ),
-    );
-  }
-
-  _hideSnackbar() {
-    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-  }
-
   _getMatchingResponse(id) async {
     var provider = Provider.of<MatchingPageProvider>(context, listen: false);
     var response = await APIHelper.getMatchingManual(id);
     if (response.isSuccessful) {
       provider.setMatchingResponse(response);
+      provider.setIsProcessing(false);
     } else {
-      _showSnackbar(response.statusCode.toString());
+      // ERROR
+      Navigator.pushReplacementNamed(context, ErrorPage.routeName, arguments: response);
     }
-    provider.setIsProcessing(false);
   }
 
   _getInitResponse(urlArg) async {
@@ -53,10 +42,11 @@ class _MatchingPageState extends State<MatchingPage> {
     if (response.isSuccessful) {
       provider.setInitResponse(response);
       _getMatchingResponse(provider.initResponse.data['id']);
+      provider.setIsProcessing(false);
     } else {
-      _showSnackbar(response.statusCode.toString());
+      // ERROR
+      Navigator.pushReplacementNamed(context, ErrorPage.routeName, arguments: response);
     }
-    provider.setIsProcessing(false);
   }
 
   @override

@@ -8,7 +8,6 @@ import 'package:spotiload/pages/finishpage.dart';
 import 'package:spotiload/pages/homepage.dart';
 import 'package:spotiload/providers/progresspagemanualprovider.dart';
 import 'package:spotiload/providers/progressprovider.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 class ProgressPageManual extends StatefulWidget {
   final String spotifyId;
@@ -28,63 +27,6 @@ class ProgressPageManual extends StatefulWidget {
 class _ProgressPageManualState extends State<ProgressPageManual> {
   bool cancel = false;
 
-  _showSnackbar(String message, {Color? bgColor}) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(child: Text(message)),
-            Container(
-              decoration: BoxDecoration(border: Border.all(width: 1.5, color: HexColor("#b71b1c")), borderRadius: BorderRadius.circular(30)),
-              height: 25,
-              child: TextButton(
-                child: const Text(
-                  'Cancel Downloading',
-                  style: styleButtonManualMatch,
-                ),
-                onPressed: () {
-                  showDialog<void>(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: const Text('Please Confirm'),
-                      content: const Text('Are you sure to cancel the download?'),
-                      actions: [
-                        TextButton(
-                            onPressed: () {
-                              // Close the dialog
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text('No')),
-                        TextButton(
-                            onPressed: () {
-                              cancel = true;
-                              _hideSnackbar();
-                              Navigator.pushAndRemoveUntil<void>(
-                                context,
-                                MaterialPageRoute<void>(builder: (BuildContext context) => const HomePage()),
-                                (Route<dynamic> route) => false,
-                              );
-                            },
-                            child: const Text('Yes')),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-        backgroundColor: bgColor ?? Colors.red,
-        duration: const Duration(days: 365),
-      ),
-    );
-  }
-
-  _hideSnackbar() {
-    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-  }
-
   _getProgressPageManualResponse(String userId, String spotifyIdArg) async {
     var provider = Provider.of<ProgressPageManualProvider>(context, listen: false);
     var response = await APIHelper.putMatching(userId, spotifyIdArg);
@@ -93,8 +35,8 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
       _getProgressResponse(userId, response.data['songs']);
       provider.setIsProcessing(false);
     } else {
+      // ERROR
       Navigator.pushReplacementNamed(context, ErrorPage.routeName, arguments: response);
-      // _showSnackbar('${response.statusCode.toString()}: ${response.message}');
     }
   }
 
@@ -107,10 +49,11 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
       var response = await APIHelper.getDownload(userId, i.toString());
       if (response.isSuccessful) {
         provider.setProgressResponse(response, i);
+        provider.setIsProcessing(false);
       } else {
-        _showSnackbar(response.statusCode.toString());
+        // ERROR
+        Navigator.pushReplacementNamed(context, ErrorPage.routeName, arguments: response);
       }
-      provider.setIsProcessing(false);
     }
     if (cancel == false) {
       if (uplaoding!) {
@@ -118,7 +61,8 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
         if (responseFinish.isSuccessful) {
           Navigator.pushReplacementNamed(context, FinishPage.routeName, arguments: responseFinish.data);
         } else {
-          _showSnackbar(responseFinish.statusCode.toString());
+          // ERROR
+          Navigator.pushReplacementNamed(context, ErrorPage.routeName, arguments: responseFinish);
         }
       }
     }
@@ -140,7 +84,7 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
 
     return Scaffold(
       body: Consumer<ProgressPageManualProvider>(
-          builder: (_, providerProgressManual, __) => providerProgressManual.isProcessing
+          builder: (_, providerProgressManual, __) => providerProgressManual.isProcessing // && true // just as an idea
               ? buildLoadingPage('Getting ready to download\n${widget.spotifyId}')
               : Container(
                   margin: firstMargin,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spotiload/helper/apihelper.dart';
 import 'package:spotiload/global.dart';
+import 'package:spotiload/pages/errormatchingpage.dart';
 import 'package:spotiload/providers/initprovider.dart';
 
 class ProgressPageAuto extends StatefulWidget {
@@ -17,28 +18,16 @@ class ProgressPageAuto extends StatefulWidget {
 }
 
 class _ProgressPageAutoState extends State<ProgressPageAuto> {
-  _showSnackbar(String message, {Color? bgColor}) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        backgroundColor: bgColor ?? Colors.red,
-      ),
-    );
-  }
-
-  _hideSnackbar() {
-    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-  }
-
   _getInitResponse(urlArg) async {
     var provider = Provider.of<InitProvider>(context, listen: false);
     var response = await APIHelper.getInit(urlArg);
     if (response.isSuccessful) {
       provider.setInitResponse(response);
+      provider.setIsProcessing(false);
     } else {
-      _showSnackbar(response.statusCode.toString());
+      // ERROR
+      Navigator.pushReplacementNamed(context, ErrorPage.routeName, arguments: response);
     }
-    provider.setIsProcessing(false);
   }
 
   @override
