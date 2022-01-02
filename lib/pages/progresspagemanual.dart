@@ -112,9 +112,13 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
     }
     if (cancel == false) {
       if (uplaoding!) {
-        await APIHelper.putUpload(userId);
+        var responseFinish = await APIHelper.putUpload(userId);
+        if (responseFinish.isSuccessful) {
+          Navigator.pushReplacementNamed(context, FinishPage.routeName, arguments: responseFinish.data);
+        } else {
+          _showSnackbar(responseFinish.statusCode.toString());
+        }
       }
-      Navigator.pushReplacementNamed(context, FinishPage.routeName);
     }
   }
 
@@ -192,6 +196,8 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                                         if (providerProgress.progressResponse.index + 1 >=
                                                 providerProgressManual.progressManualResponse.data['songs'].length &&
                                             uplaoding!) {
+                                          providerProgress.progressResponse.index =
+                                              -1; // Idea to fix the issue with the persisten progress state when downloading a new album after an old was already downloaded
                                           return Row(
                                             children: const [
                                               Text('Uploading songs'),

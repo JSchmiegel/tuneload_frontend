@@ -10,6 +10,7 @@ import 'package:spotiload/providers/matchingpageprovider.dart';
 import 'package:spotiload/providers/progresspagemanualprovider.dart';
 import 'package:spotiload/providers/progressprovider.dart';
 import 'pages/finishpage.dart';
+import 'providers/finishpageprovider.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
@@ -39,7 +40,6 @@ class MyApp extends StatelessWidget {
         //     )),
         SettingPage.routeName: (context) => const SettingPage(),
         // MatchingPage.routeName: (context) => const MatchingPage(),
-        FinishPage.routeName: (context) => const FinishPage(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == ProgressPageAuto.routeName) {
@@ -66,6 +66,17 @@ class MyApp extends StatelessWidget {
                   child: ProgressPageManual(
                     spotifyId: args['spotifyId'],
                     userId: args['userId'],
+                  )));
+        } else if (settings.name == FinishPage.routeName) {
+          var args = settings.arguments as Map<String, dynamic>;
+          return MaterialPageRoute(
+              builder: (context) => ChangeNotifierProvider<FinishPageProvider>(
+                  create: (context) => FinishPageProvider(),
+                  child: FinishPage(
+                    album_name: args['album'],
+                    album_artist: args['album_artist'],
+                    image: args['image'],
+                    num_of_songs: args['num_of_songs'],
                   )));
         }
       },

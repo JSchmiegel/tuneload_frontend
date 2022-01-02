@@ -11,6 +11,10 @@ final redColor = Colors.red[300];
 const styleButton = TextStyle(color: Colors.white, fontSize: 16);
 const styleText = TextStyle(color: Colors.black, fontSize: 20);
 
+TextStyle generalTextStyle(fontSize) {
+  return TextStyle(color: Colors.black, fontSize: fontSize);
+}
+
 // Settingspage
 const decorationSettingInput = InputDecoration(
   border: OutlineInputBorder(),
