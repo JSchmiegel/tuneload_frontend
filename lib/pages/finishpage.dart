@@ -47,23 +47,30 @@ class FinishPage extends StatelessWidget {
               flex: 1,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Downloaded:',
+                        style: generalTextStyle(15.0),
+                      ),
+                      Text(
+                        '${album_name} - ${album_artist} (${num_of_songs} songs)',
+                        style: generalTextStyle(20.0),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
                 Image.network(
                   image,
                   width: 180.0,
-                ),
-                Column(
-                  children: [
-                    Text(
-                      'Downlaoded:',
-                      style: generalTextStyle(20.0),
-                    ),
-                    Text(
-                      '${album_name} - ${album_artist} (${num_of_songs} songs)',
-                      style: generalTextStyle(18.0),
-                    ),
-                  ],
                 ),
               ],
             ),
