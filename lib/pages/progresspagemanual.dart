@@ -31,7 +31,7 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(message),
             Container(
