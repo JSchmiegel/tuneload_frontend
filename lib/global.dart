@@ -10,6 +10,7 @@ final redColor = Colors.red[300];
 
 const styleButton = TextStyle(color: Colors.white, fontSize: 16);
 const styleText = TextStyle(color: Colors.black, fontSize: 20);
+const styleTextGreat = TextStyle(color: Colors.black, fontSize: 35);
 
 TextStyle generalTextStyle(fontSize) {
   return TextStyle(color: Colors.black, fontSize: fontSize);
@@ -65,5 +66,8 @@ Widget buildLoadingPage(String message) {
   );
 }
 
-// finishpage
-const styleTextFinish = TextStyle(color: Colors.black, fontSize: 35);
+// Error Page
+const spacerTableError = SizedBox(
+  width: 20,
+);
+const styleTextErrorContent = TextStyle(color: Colors.black, fontSize: 18.0, fontStyle: FontStyle.italic);

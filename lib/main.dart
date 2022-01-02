@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:spotiload/models/httpresponse.dart';
+import 'package:spotiload/pages/errormatchingpage.dart';
 import 'package:spotiload/pages/homepage.dart';
 import 'package:spotiload/pages/matchingpage.dart';
 import 'package:spotiload/pages/progresspageauto.dart';
 import 'package:spotiload/pages/progresspagemanual.dart';
 import 'package:spotiload/pages/settingpage.dart';
+import 'package:spotiload/providers/errorpageprovider.dart';
 import 'package:spotiload/providers/initprovider.dart';
 import 'package:spotiload/providers/matchingpageprovider.dart';
 import 'package:spotiload/providers/progresspagemanualprovider.dart';
@@ -39,7 +42,6 @@ class MyApp extends StatelessWidget {
         //       urlArg: '',
         //     )),
         SettingPage.routeName: (context) => const SettingPage(),
-        // MatchingPage.routeName: (context) => const MatchingPage(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == ProgressPageAuto.routeName) {
@@ -77,6 +79,14 @@ class MyApp extends StatelessWidget {
                     album_artist: args['album_artist'],
                     image: args['image'],
                     num_of_songs: args['num_of_songs'],
+                  )));
+        } else if (settings.name == ErrorPage.routeName) {
+          var args = settings.arguments as HTTPResponse;
+          return MaterialPageRoute(
+              builder: (context) => ChangeNotifierProvider<ErrorPageProvider>(
+                  create: (context) => ErrorPageProvider(),
+                  child: ErrorPage(
+                    response: args,
                   )));
         }
       },

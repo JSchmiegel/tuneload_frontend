@@ -37,12 +37,11 @@ class FinishPage extends StatelessWidget {
                 SizedBox(
                   child: Text(
                     'Done',
-                    style: styleTextFinish,
+                    style: styleTextGreat,
                   ),
                 )
               ],
             ),
-            // IDEA [ ] insert image of playlist and finish overview
             const Spacer(
               flex: 1,
             ),

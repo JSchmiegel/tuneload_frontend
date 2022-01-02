@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:spotiload/helper/apihelper.dart';
 import 'package:spotiload/global.dart';
 import 'package:spotiload/models/jumpingdotsindicator.dart';
+import 'package:spotiload/pages/errormatchingpage.dart';
 import 'package:spotiload/pages/finishpage.dart';
 import 'package:spotiload/pages/homepage.dart';
 import 'package:spotiload/providers/progresspagemanualprovider.dart';
@@ -92,7 +93,8 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
       _getProgressResponse(userId, response.data['songs']);
       provider.setIsProcessing(false);
     } else {
-      _showSnackbar('${response.statusCode.toString()}: ${response.message}');
+      Navigator.pushReplacementNamed(context, ErrorPage.routeName, arguments: response);
+      // _showSnackbar('${response.statusCode.toString()}: ${response.message}');
     }
   }
 
