@@ -1,4 +1,4 @@
-import 'package:spotiload/models/httpresponse.dart';
+import 'package:tuneload/models/httpresponse.dart';
 
 class ProgressResponseObj {
   HTTPResponse httpResponse;

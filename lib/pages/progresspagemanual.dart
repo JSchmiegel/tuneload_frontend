@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spotiload/helper/apihelper.dart';
-import 'package:spotiload/global.dart';
-import 'package:spotiload/models/jumpingdotsindicator.dart';
-import 'package:spotiload/pages/errorpage.dart';
-import 'package:spotiload/pages/finishpage.dart';
-import 'package:spotiload/pages/homepage.dart';
-import 'package:spotiload/providers/progresspagemanualprovider.dart';
-import 'package:spotiload/providers/progressprovider.dart';
+import 'package:tuneload/helper/apihelper.dart';
+import 'package:tuneload/global.dart';
+import 'package:tuneload/models/jumpingdotsindicator.dart';
+import 'package:tuneload/pages/errorpage.dart';
+import 'package:tuneload/pages/finishpage.dart';
+import 'package:tuneload/pages/homepage.dart';
+import 'package:tuneload/providers/progresspagemanualprovider.dart';
+import 'package:tuneload/providers/progressprovider.dart';
 
 class ProgressPageManual extends StatefulWidget {
   final String spotifyId;

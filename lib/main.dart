@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spotiload/models/httpresponse.dart';
-import 'package:spotiload/pages/errorpage.dart';
-import 'package:spotiload/pages/homepage.dart';
-import 'package:spotiload/pages/matchingpage.dart';
-import 'package:spotiload/pages/progresspageauto.dart';
-import 'package:spotiload/pages/progresspagemanual.dart';
-import 'package:spotiload/pages/settingpage.dart';
-import 'package:spotiload/providers/errorpageprovider.dart';
-import 'package:spotiload/providers/initprovider.dart';
-import 'package:spotiload/providers/matchingpageprovider.dart';
-import 'package:spotiload/providers/progresspagemanualprovider.dart';
-import 'package:spotiload/providers/progressprovider.dart';
-// import 'package:spotiload/themes/tuneloadTheme.dart';
+import 'package:tuneload/models/httpresponse.dart';
+import 'package:tuneload/pages/errorpage.dart';
+import 'package:tuneload/pages/homepage.dart';
+import 'package:tuneload/pages/matchingpage.dart';
+import 'package:tuneload/pages/progresspageauto.dart';
+import 'package:tuneload/pages/progresspagemanual.dart';
+import 'package:tuneload/pages/settingpage.dart';
+import 'package:tuneload/providers/errorpageprovider.dart';
+import 'package:tuneload/providers/initprovider.dart';
+import 'package:tuneload/providers/matchingpageprovider.dart';
+import 'package:tuneload/providers/progresspagemanualprovider.dart';
+import 'package:tuneload/providers/progressprovider.dart';
+// import 'package:tuneload/themes/tuneloadTheme.dart';
 import 'pages/finishpage.dart';
 import 'providers/finishpageprovider.dart';
 
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Spotiload',
+        title: 'TuneLoad',
         initialRoute: HomePage.routeName,
         routes: {
           HomePage.routeName: (context) => const HomePage(),

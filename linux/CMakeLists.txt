@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(runner LANGUAGES CXX)
 
-set(BINARY_NAME "spotiload")
-set(APPLICATION_ID "com.example.spotiload")
+set(BINARY_NAME "tuneload")
+set(APPLICATION_ID "com.example.tuneload")
 
 cmake_policy(SET CMP0063 NEW)
 

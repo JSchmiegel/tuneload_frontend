@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spotiload/global.dart';
-import 'package:spotiload/helper/apihelper.dart';
-import 'package:spotiload/pages/errorpage.dart';
-import 'package:spotiload/pages/homepage.dart';
-import 'package:spotiload/pages/progresspageauto.dart';
-import 'package:spotiload/pages/progresspagemanual.dart';
-import 'package:spotiload/providers/initprovider.dart';
-import 'package:spotiload/providers/matchingpageprovider.dart';
+import 'package:tuneload/global.dart';
+import 'package:tuneload/helper/apihelper.dart';
+import 'package:tuneload/pages/errorpage.dart';
+import 'package:tuneload/pages/homepage.dart';
+import 'package:tuneload/pages/progresspageauto.dart';
+import 'package:tuneload/pages/progresspagemanual.dart';
+import 'package:tuneload/providers/initprovider.dart';
+import 'package:tuneload/providers/matchingpageprovider.dart';
 
 class MatchingPage extends StatefulWidget {
   final String urlArg;

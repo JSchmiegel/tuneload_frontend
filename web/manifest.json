@@ -1,6 +1,6 @@
 {
-    "name": "spotiload",
-    "short_name": "spotiload",
+    "name": "tuneload",
+    "short_name": "tuneload",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

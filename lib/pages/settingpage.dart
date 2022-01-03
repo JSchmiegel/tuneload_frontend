@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:spotiload/helper/apihelper.dart';
-import 'package:spotiload/global.dart';
-import 'package:spotiload/models/settings.dart';
-import 'package:spotiload/pages/errorpage.dart';
-import 'package:spotiload/pages/homepage.dart';
+import 'package:tuneload/helper/apihelper.dart';
+import 'package:tuneload/global.dart';
+import 'package:tuneload/models/settings.dart';
+import 'package:tuneload/pages/errorpage.dart';
+import 'package:tuneload/pages/homepage.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);

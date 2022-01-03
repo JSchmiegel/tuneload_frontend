@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:spotiload/global.dart';
-import 'package:spotiload/models/httpresponse.dart';
-import 'package:spotiload/pages/homepage.dart';
+import 'package:tuneload/global.dart';
+import 'package:tuneload/models/httpresponse.dart';
+import 'package:tuneload/pages/homepage.dart';
 
 class ErrorPage extends StatelessWidget {
   final HTTPResponse response;

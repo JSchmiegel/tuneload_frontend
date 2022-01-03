@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:spotiload/global.dart';
-import 'package:spotiload/pages/matchingpage.dart';
-import 'package:spotiload/pages/progresspageauto.dart';
-import 'package:spotiload/pages/settingpage.dart';
+import 'package:tuneload/global.dart';
+import 'package:tuneload/pages/matchingpage.dart';
+import 'package:tuneload/pages/progresspageauto.dart';
+import 'package:tuneload/pages/settingpage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Spotiload'),
+        title: const Text('TuneLoad'),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),

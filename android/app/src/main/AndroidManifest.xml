@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.spotiload">
+    package="com.example.tuneload">
    <application
-        android:label="spotiload"
+        android:label="tuneload"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:spotiload/global.dart';
-import 'package:spotiload/models/httpresponse.dart';
-import 'package:spotiload/models/settings.dart';
+import 'package:tuneload/global.dart';
+import 'package:tuneload/models/httpresponse.dart';
+import 'package:tuneload/models/settings.dart';
 
 class APIHelper {
   // settings api
@@ -93,7 +93,7 @@ class APIHelper {
   // general api
 
   static Future<HTTPResponse> getInit(String urlParam) async {
-    const String uri = '/spotiload/init';
+    const String uri = '/tuneload/init';
     var headers = {'Accept': 'application/json'};
     var queryParameters = {'url': urlParam};
     try {
@@ -129,7 +129,7 @@ class APIHelper {
   }
 
   static Future<HTTPResponse> getMatchingManual(String id) async {
-    String uri = '/spotiload/matching/$id';
+    String uri = '/tuneload/matching/$id';
     var headers = {'Accept': 'application/json'};
     try {
       http.Response response = await http.get(
@@ -164,7 +164,7 @@ class APIHelper {
   }
 
   static Future<HTTPResponse> putMatching(String id, String spotifyId) async {
-    String uri = '/spotiload/matching/$id';
+    String uri = '/tuneload/matching/$id';
     var headers = {'Accept': 'application/json'};
     var body = {'matching': spotifyId};
     try {
@@ -201,7 +201,7 @@ class APIHelper {
   }
 
   static Future<HTTPResponse> getDownload(String id, String numOfSong) async {
-    String uri = '/spotiload/downloading/$id';
+    String uri = '/tuneload/downloading/$id';
     var headers = {'Accept': 'application/json'};
     var queryParameters = {'num_of_song': numOfSong};
     try {
@@ -237,7 +237,7 @@ class APIHelper {
   }
 
   static Future<HTTPResponse> putUpload(String id) async {
-    String uri = '/spotiload/uploading/$id';
+    String uri = '/tuneload/uploading/$id';
     var headers = {'Accept': 'application/json'};
     try {
       http.Response response = await http.put(

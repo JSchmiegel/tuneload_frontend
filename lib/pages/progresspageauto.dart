@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spotiload/helper/apihelper.dart';
-import 'package:spotiload/global.dart';
-import 'package:spotiload/pages/errorpage.dart';
-import 'package:spotiload/providers/initprovider.dart';
+import 'package:tuneload/helper/apihelper.dart';
+import 'package:tuneload/global.dart';
+import 'package:tuneload/pages/errorpage.dart';
+import 'package:tuneload/providers/initprovider.dart';
 
 class ProgressPageAuto extends StatefulWidget {
   final String urlArg;
@@ -43,7 +43,7 @@ class _ProgressPageAutoState extends State<ProgressPageAuto> {
     return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
-          // appBar: AppBar(title: const Text('Spotiload')),
+          // appBar: AppBar(title: const Text('TuneLoad')),
           body: Consumer<InitProvider>(
               builder: (_, provider, __) => provider.isProcessing
                   ? buildLoadingPage('Getting ready to download\n${widget.urlArg}')
@@ -116,7 +116,7 @@ class _ProgressPageAutoState extends State<ProgressPageAuto> {
   //   if (response.statusCode == 200) {
   //     return json.decode(response.body);
   //   } else {
-  //     throw Exception('Failed to get /spotiload/init');
+  //     throw Exception('Failed to get /tuneload/init');
   //   }
   // }
 }

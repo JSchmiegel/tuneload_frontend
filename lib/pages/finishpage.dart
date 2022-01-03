@@ -1,7 +1,7 @@
 import 'package:drop_shadow/drop_shadow.dart';
 import 'package:flutter/material.dart';
-import 'package:spotiload/global.dart';
-import 'package:spotiload/pages/homepage.dart';
+import 'package:tuneload/global.dart';
+import 'package:tuneload/pages/homepage.dart';
 
 class FinishPage extends StatelessWidget {
   final String album_name;

@@ -1,4 +1,4 @@
-package com.example.spotiload
+package com.example.tuneload
 
 import io.flutter.embedding.android.FlutterActivity
 

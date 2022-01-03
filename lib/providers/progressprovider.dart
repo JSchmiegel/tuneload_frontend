@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:spotiload/models/httpresponse.dart';
-import 'package:spotiload/models/progressresponse.dart';
+import 'package:tuneload/models/httpresponse.dart';
+import 'package:tuneload/models/progressresponse.dart';
 
 class ProgressProvider extends ChangeNotifier {
   bool _isProcessing = true;
