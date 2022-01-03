@@ -173,7 +173,11 @@ class _MatchingPageState extends State<MatchingPage> {
                                                   child: const Text('No')),
                                               TextButton(
                                                   onPressed: () {
-                                                    Navigator.of(context).popUntil(ModalRoute.withName(HomePage.routeName));
+                                                    Navigator.pushAndRemoveUntil<void>(
+                                                      context,
+                                                      MaterialPageRoute<void>(builder: (BuildContext context) => const HomePage()),
+                                                      (Route<dynamic> route) => false,
+                                                    );
                                                   },
                                                   child: const Text('Yes')),
                                             ],
