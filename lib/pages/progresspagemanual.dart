@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:spotiload/helper/apihelper.dart';
 import 'package:spotiload/global.dart';
 import 'package:spotiload/models/jumpingdotsindicator.dart';
-import 'package:spotiload/pages/errormatchingpage.dart';
+import 'package:spotiload/pages/errorpage.dart';
 import 'package:spotiload/pages/finishpage.dart';
 import 'package:spotiload/pages/homepage.dart';
 import 'package:spotiload/providers/progresspagemanualprovider.dart';

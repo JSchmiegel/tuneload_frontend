@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spotiload/models/httpresponse.dart';
-import 'package:spotiload/pages/errormatchingpage.dart';
+import 'package:spotiload/pages/errorpage.dart';
 import 'package:spotiload/pages/homepage.dart';
 import 'package:spotiload/pages/matchingpage.dart';
 import 'package:spotiload/pages/progresspageauto.dart';
