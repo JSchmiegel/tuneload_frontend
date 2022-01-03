@@ -12,7 +12,7 @@ class APIHelper {
     var headers = {'Accept': 'application/json'};
     try {
       http.Response response = await http.get(
-        Uri.http(globalHost, uri),
+        Uri.http(globalHost, apiVersion + uri),
         headers: headers,
       );
       if (response.statusCode != 200) {
@@ -59,7 +59,7 @@ class APIHelper {
     var headers = {'Content-type': 'application/json', 'Accept': 'application/json'};
     try {
       http.Response response = await http.put(
-        Uri.http(globalHost, uri),
+        Uri.http(globalHost, apiVersion + uri),
         headers: headers,
         body: jsonEncode(settings),
       );
@@ -98,7 +98,7 @@ class APIHelper {
     var queryParameters = {'url': urlParam};
     try {
       http.Response response = await http.get(
-        Uri.http(globalHost, uri, queryParameters),
+        Uri.http(globalHost, apiVersion + uri, queryParameters),
         headers: headers,
       );
       if (response.statusCode != 200) {
@@ -133,7 +133,7 @@ class APIHelper {
     var headers = {'Accept': 'application/json'};
     try {
       http.Response response = await http.get(
-        Uri.http(globalHost, uri),
+        Uri.http(globalHost, apiVersion + uri),
         headers: headers,
       );
       if (response.statusCode != 200) {
@@ -169,7 +169,7 @@ class APIHelper {
     var body = {'matching': spotifyId};
     try {
       http.Response response = await http.put(
-        Uri.http(globalHost, uri),
+        Uri.http(globalHost, apiVersion + uri),
         headers: headers,
         body: body,
       );
@@ -206,7 +206,7 @@ class APIHelper {
     var queryParameters = {'num_of_song': numOfSong};
     try {
       http.Response response = await http.get(
-        Uri.http(globalHost, uri, queryParameters),
+        Uri.http(globalHost, apiVersion + uri, queryParameters),
         headers: headers,
       );
       if (response.statusCode != 200) {
@@ -241,7 +241,7 @@ class APIHelper {
     var headers = {'Accept': 'application/json'};
     try {
       http.Response response = await http.put(
-        Uri.http(globalHost, uri),
+        Uri.http(globalHost, apiVersion + uri),
         headers: headers,
       );
       if (response.statusCode != 200) {
