@@ -26,6 +26,7 @@ class ProgressPageManual extends StatefulWidget {
 
 class _ProgressPageManualState extends State<ProgressPageManual> {
   bool cancel = false;
+  bool error = false;
 
   _getProgressPageManualResponse(String userId, String spotifyIdArg) async {
     var provider = Provider.of<ProgressPageManualProvider>(context, listen: false);
@@ -53,9 +54,11 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
       } else {
         // ERROR
         Navigator.pushReplacementNamed(context, ErrorPage.routeName, arguments: response);
+        error = true;
+        break;
       }
     }
-    if (cancel == false) {
+    if (cancel == false && error == false) {
       if (uplaoding!) {
         var responseFinish = await APIHelper.putUpload(userId);
         if (responseFinish.isSuccessful) {
