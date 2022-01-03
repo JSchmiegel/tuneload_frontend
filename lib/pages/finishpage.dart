@@ -1,5 +1,3 @@
-// ignore_for_file: unnecessary_brace_in_string_interps
-
 import 'package:drop_shadow/drop_shadow.dart';
 import 'package:flutter/material.dart';
 import 'package:spotiload/global.dart';
@@ -33,17 +31,6 @@ class FinishPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: const [
-            //     SizedBox(
-            //       child: Text(
-            //         'Done',
-            //         style: styleTextGreat,
-            //       ),
-            //     )
-            //   ],
-            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -60,7 +47,7 @@ class FinishPage extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        ' - ${album_artist} (${num_of_songs} songs)',
+                        ' - $album_artist ($num_of_songs songs)',
                         style: generalTextStyle(20.0),
                       )
                     ],

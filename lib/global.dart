@@ -70,4 +70,5 @@ Widget buildLoadingPage(String message) {
 const spacerTableError = SizedBox(
   width: 20,
 );
-const styleTextErrorContent = TextStyle(color: Colors.black, fontSize: 18.0, fontStyle: FontStyle.italic);
+const styleTextErrorKey = TextStyle(color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.bold);
+const styleTextErrorValue = TextStyle(color: Colors.black, fontSize: 18.0);

@@ -34,20 +34,18 @@ class ErrorPage extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text('HTTP-Error Code:', style: generalTextStyle(20.0)),
+                          const Text('HTTP-Error Code:', style: styleTextErrorKey),
                           spacerTableError,
-                          Text('${response.statusCode}', style: generalTextStyle(20.0))
+                          Text('${response.statusCode}', style: styleTextErrorValue)
                         ],
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                      const SizedBox(height: 5),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text('HTTP-Request was successfull:', style: generalTextStyle(18.0)),
+                          const Text('HTTP-Request was successfull:', style: styleTextErrorKey),
                           spacerTableError,
-                          Text('${response.isSuccessful}', style: styleTextErrorContent)
+                          Text('${response.isSuccessful}', style: styleTextErrorValue)
                         ],
                       ),
                       const SizedBox(height: 5),
@@ -55,9 +53,9 @@ class ErrorPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('HTTP-Message:', style: generalTextStyle(18.0)),
+                          const Text('HTTP-Message:', style: styleTextErrorKey),
                           spacerTableError,
-                          Expanded(child: Text('${response.message}', style: styleTextErrorContent))
+                          Expanded(child: Text('${response.message}', style: styleTextErrorValue))
                         ],
                       ),
                       const SizedBox(height: 5),
@@ -65,9 +63,9 @@ class ErrorPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('HTTP-Body:', style: generalTextStyle(18.0)),
+                          const Text('HTTP-Body:', style: styleTextErrorKey),
                           spacerTableError,
-                          Expanded(child: Text('${response.data}', style: styleTextErrorContent))
+                          Expanded(child: Text('${response.data}', style: styleTextErrorValue))
                         ],
                       ),
                     ],
