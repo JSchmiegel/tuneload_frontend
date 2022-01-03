@@ -69,3 +69,7 @@ lib/generated_plugin_registrant.dart
 
 #vscode
 .vscode
+
+#theme files (help for building theme)
+/lib/themes/colors*.xml
+/lib/themes/theme.dart
