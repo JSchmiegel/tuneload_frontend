@@ -24,38 +24,45 @@ class FinishPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Downloaded:'),
+        automaticallyImplyLeading: false, // removes the back button
+      ),
       body: Container(
-        margin: const EdgeInsets.fromLTRB(33, 33, 33, 10),
+        margin: const EdgeInsets.fromLTRB(33, 0, 33, 31),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                SizedBox(
-                  child: Text(
-                    'Done',
-                    style: styleTextGreat,
-                  ),
-                )
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: const [
+            //     SizedBox(
+            //       child: Text(
+            //         'Done',
+            //         style: styleTextGreat,
+            //       ),
+            //     )
+            //   ],
+            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Expanded(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Downloaded:',
-                        style: generalTextStyle(15.0),
-                      ),
-                      Text(
-                        '${album_name} - ${album_artist} (${num_of_songs} songs)',
+                        album_name,
                         style: generalTextStyle(20.0),
                       ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        ' - ${album_artist} (${num_of_songs} songs)',
+                        style: generalTextStyle(20.0),
+                      )
                     ],
                   ),
                 ),
