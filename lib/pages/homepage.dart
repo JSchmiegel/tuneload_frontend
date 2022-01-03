@@ -182,7 +182,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Container(
                       padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(color: greenColor, borderRadius: BorderRadius.circular(6)),
+                      decoration: BoxDecoration(color: mainColor, borderRadius: BorderRadius.circular(6)),
                       child: TextButton(
                         child: const Text(
                           'Download',

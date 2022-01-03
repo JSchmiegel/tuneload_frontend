@@ -153,7 +153,7 @@ class _MatchingPageState extends State<MatchingPage> {
                                 Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, mainAxisSize: MainAxisSize.max, children: [
                                   Container(
                                     padding: const EdgeInsets.all(5),
-                                    decoration: BoxDecoration(color: greenColor, borderRadius: BorderRadius.circular(6)),
+                                    decoration: BoxDecoration(color: mainColor, borderRadius: BorderRadius.circular(6)),
                                     child: TextButton(
                                       child: const Text(
                                         'Cancel',
@@ -254,7 +254,7 @@ class _MatchingPageState extends State<MatchingPage> {
                                   ),
                                   Container(
                                     padding: const EdgeInsets.all(5),
-                                    decoration: BoxDecoration(color: greenColor, borderRadius: BorderRadius.circular(6)),
+                                    decoration: BoxDecoration(color: mainColor, borderRadius: BorderRadius.circular(6)),
                                     child: TextButton(
                                       child: const Text(
                                         'Confirm',

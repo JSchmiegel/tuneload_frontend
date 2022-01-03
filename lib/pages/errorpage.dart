@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:spotiload/global.dart';
 import 'package:spotiload/models/httpresponse.dart';
 import 'package:spotiload/pages/homepage.dart';
@@ -16,7 +15,7 @@ class ErrorPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('ERROR'),
         automaticallyImplyLeading: false, // removes the back button
-        backgroundColor: HexColor("#b71b1c"),
+        backgroundColor: const Color(0xFFb71b1c),
       ),
       body: Container(
         margin: firstMargin,
@@ -82,9 +81,9 @@ class ErrorPage extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
-                    border: Border.all(color: HexColor("#b71b1c")),
+                    border: Border.all(color: const Color(0xFFb71b1c)),
                     borderRadius: BorderRadius.circular(6),
-                    color: HexColor("#ef534f"),
+                    color: const Color(0xFFef534f),
                   ),
                   child: TextButton(
                     child: const Text(

@@ -5,7 +5,7 @@ bool? uplaoding = true;
 
 const firstMargin = EdgeInsets.all(33);
 double buttonSplashRadius = 15;
-final greenColor = Colors.green[500];
+final mainColor = Color(0xFFd4a373);
 final redColor = Colors.red[300];
 
 const styleButton = TextStyle(color: Colors.white, fontSize: 16);
