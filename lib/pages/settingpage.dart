@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:spotiload/helper/apihelper.dart';
 import 'package:spotiload/global.dart';
 import 'package:spotiload/models/settings.dart';
+import 'package:spotiload/pages/errorpage.dart';
 import 'package:spotiload/pages/homepage.dart';
 
 class SettingPage extends StatefulWidget {
@@ -234,9 +235,11 @@ class _SettingPageState extends State<SettingPage> {
   Future<Settings> _callBackendApiGet() async {
     final response = await APIHelper.getSettings();
     if (response.statusCode == 200) {
-      return Settings.fromJson(json.decode(response.body));
+      return Settings.fromJson(json.decode(response.data));
     } else {
-      throw Exception('Failed to load settings');
+      // ERROR
+      Navigator.pushReplacementNamed(context, ErrorPage.routeName, arguments: response);
+      return Settings.error();
     }
   }
 
@@ -251,9 +254,11 @@ class _SettingPageState extends State<SettingPage> {
 
     final response = await APIHelper.putSettings(settings);
     if (response.statusCode == 200) {
-      return Settings.fromJson(json.decode(response.body));
+      return Settings.fromJson(json.decode(response.data));
     } else {
-      throw Exception('Failed to load settings');
+      // ERROR
+      Navigator.pushReplacementNamed(context, ErrorPage.routeName, arguments: response);
+      return Settings.error();
     }
   }
 }

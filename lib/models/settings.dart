@@ -24,6 +24,17 @@ class Settings {
         pathMusic: json['paths']['music']);
   }
 
+  factory Settings.error() {
+    return Settings(
+      hostAddress: 'error',
+      hostPasswd: 'error',
+      hostPort: 'error',
+      hostToken: 'error',
+      hostUser: 'error',
+      pathMusic: 'error',
+    );
+  }
+
   Map toJson() => {
         'address': hostAddress,
         'port': hostPort,
