@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_brace_in_string_interps
 
+import 'package:drop_shadow/drop_shadow.dart';
 import 'package:flutter/material.dart';
 import 'package:spotiload/global.dart';
 import 'package:spotiload/pages/homepage.dart';
@@ -24,13 +25,10 @@ class FinishPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: firstMargin,
+        margin: const EdgeInsets.fromLTRB(33, 33, 33, 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Spacer(
-              flex: 1,
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
@@ -41,9 +39,6 @@ class FinishPage extends StatelessWidget {
                   ),
                 )
               ],
-            ),
-            const Spacer(
-              flex: 1,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -67,14 +62,14 @@ class FinishPage extends StatelessWidget {
                 const SizedBox(
                   width: 20,
                 ),
-                Image.network(
-                  image,
-                  width: 180.0,
+                DropShadow(
+                  child: Image.network(
+                    image,
+                    width: 180.0,
+                  ),
+                  blurRadius: 7.0,
                 ),
               ],
-            ),
-            const Spacer(
-              flex: 1,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
