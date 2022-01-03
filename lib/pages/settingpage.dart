@@ -235,7 +235,7 @@ class _SettingPageState extends State<SettingPage> {
   Future<Settings> _callBackendApiGet() async {
     final response = await APIHelper.getSettings();
     if (response.statusCode == 200) {
-      return Settings.fromJson(json.decode(response.data));
+      return Settings.fromJson(response.data);
     } else {
       // ERROR
       Navigator.pushReplacementNamed(context, ErrorPage.routeName, arguments: response);
@@ -254,7 +254,7 @@ class _SettingPageState extends State<SettingPage> {
 
     final response = await APIHelper.putSettings(settings);
     if (response.statusCode == 200) {
-      return Settings.fromJson(json.decode(response.data));
+      return Settings.fromJson(response.data);
     } else {
       // ERROR
       Navigator.pushReplacementNamed(context, ErrorPage.routeName, arguments: response);

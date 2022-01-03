@@ -191,7 +191,7 @@ class _MatchingPageState extends State<MatchingPage> {
                                   ),
                                   Container(
                                     decoration: BoxDecoration(
-                                        border: Border.all(width: 1.5, color: Colors.lightGreen), borderRadius: BorderRadius.circular(30)),
+                                        border: Border.all(width: 1.5, color: const Color(0xFFffd5a2)), borderRadius: BorderRadius.circular(30)),
                                     height: 25,
                                     child: TextButton(
                                       child: const Text(
