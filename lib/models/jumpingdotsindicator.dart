@@ -1,3 +1,4 @@
+// inspired from: https://github.com/wal33d006/jumping_dots
 import 'package:flutter/material.dart';
 
 class _JumpingDot extends AnimatedWidget {
