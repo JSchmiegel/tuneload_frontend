@@ -59,14 +59,12 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
       }
     }
     if (cancel == false && error == false) {
-      if (uplaoding!) {
-        var responseFinish = await APIHelper.putUpload(userId);
-        if (responseFinish.isSuccessful) {
-          Navigator.pushReplacementNamed(context, FinishPage.routeName, arguments: responseFinish.data);
-        } else {
-          // ERROR
-          Navigator.pushReplacementNamed(context, ErrorPage.routeName, arguments: responseFinish);
-        }
+      var responseFinish = await APIHelper.putUpload(userId);
+      if (responseFinish.isSuccessful) {
+        Navigator.pushReplacementNamed(context, FinishPage.routeName, arguments: responseFinish.data);
+      } else {
+        // ERROR
+        Navigator.pushReplacementNamed(context, ErrorPage.routeName, arguments: responseFinish);
       }
     }
   }
@@ -80,9 +78,7 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
   @override
   Widget build(BuildContext context) {
     int addProgress = 0;
-    if (uplaoding!) {
-      addProgress = 1;
-    }
+    addProgress = 1;
 
     return Scaffold(
       body: Consumer<ProgressPageManualProvider>(
@@ -142,8 +138,7 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                                     children: [
                                       LayoutBuilder(builder: (context, constraints) {
                                         if (providerProgress.progressResponse.index + 1 >=
-                                                providerProgressManual.progressManualResponse.data['songs'].length &&
-                                            uplaoding!) {
+                                            providerProgressManual.progressManualResponse.data['songs'].length) {
                                           providerProgress.progressResponse.index = -1;
                                           return Row(
                                             children: const [

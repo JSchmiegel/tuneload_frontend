@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tuneload/global.dart';
 import 'package:tuneload/pages/matchingpage.dart';
-import 'package:tuneload/pages/progresspageauto.dart';
 import 'package:tuneload/pages/settingpage.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,7 +16,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String? url;
-  bool? autoMatching = false;
 
   Map<String, dynamic>? initResponse;
 
@@ -26,7 +24,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    uplaoding = true;
   }
 
   @override
@@ -73,13 +70,7 @@ class _HomePageState extends State<HomePage> {
                   },
                   onFieldSubmitted: (value) {
                     url = value;
-                    if (autoMatching == true) {
-                      // progressPage
-                      Navigator.pushNamed(context, ProgressPageAuto.routeName, arguments: url);
-                    } else {
-                      // matchingPage
-                      Navigator.pushNamed(context, MatchingPage.routeName, arguments: url);
-                    }
+                    Navigator.pushNamed(context, MatchingPage.routeName, arguments: url);
                   },
                 ),
                 const Spacer(
@@ -88,53 +79,6 @@ class _HomePageState extends State<HomePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    FormField<bool>(
-                      initialValue: uplaoding,
-                      builder: (formFieldState) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Checkbox(
-                                    value: uplaoding,
-                                    onChanged: (value) {
-                                      // When the value of the checkbox changes,
-                                      // update the FormFieldState so the form is
-                                      // re-validated.
-                                      formFieldState.didChange(value);
-                                      setState(() {
-                                        uplaoding = value;
-                                      });
-                                    },
-                                    splashRadius: buttonSplashRadius),
-                                Text(
-                                  'direct upload to plex server',
-                                  style: Theme.of(context).textTheme.subtitle1,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Checkbox(
-                                    value: autoMatching,
-                                    onChanged: (value) {
-                                      formFieldState.didChange(value);
-                                      setState(() {
-                                        autoMatching = value;
-                                      });
-                                    },
-                                    splashRadius: buttonSplashRadius),
-                                Text(
-                                  'auto matching',
-                                  style: Theme.of(context).textTheme.subtitle1,
-                                ),
-                              ],
-                            ),
-                          ],
-                        );
-                      },
-                    ),
                     Container(
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(color: mainColor, borderRadius: BorderRadius.circular(6)),
@@ -151,13 +95,7 @@ class _HomePageState extends State<HomePage> {
                             return;
                           }
 
-                          if (autoMatching == true) {
-                            // progressPage
-                            Navigator.pushNamed(context, ProgressPageAuto.routeName, arguments: url);
-                          } else {
-                            // matchingPage
-                            Navigator.pushNamed(context, MatchingPage.routeName, arguments: url);
-                          }
+                          Navigator.pushNamed(context, MatchingPage.routeName, arguments: url);
                         },
                       ),
                     ),
