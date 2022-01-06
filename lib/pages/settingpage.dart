@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:tuneload/helper/apihelper.dart';
 import 'package:tuneload/global.dart';
@@ -216,7 +215,6 @@ class _SettingPageState extends State<SettingPage> {
                                 TextButton(
                                     onPressed: () {
                                       _callBackendApiPut();
-                                      // Navigator.of(context).pop();
                                       Navigator.of(context).popUntil(ModalRoute.withName(HomePage.routeName));
                                     },
                                     child: const Text('Yes')),

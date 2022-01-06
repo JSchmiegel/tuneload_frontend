@@ -4,7 +4,6 @@ import 'package:tuneload/global.dart';
 import 'package:tuneload/helper/apihelper.dart';
 import 'package:tuneload/pages/errorpage.dart';
 import 'package:tuneload/pages/homepage.dart';
-import 'package:tuneload/pages/progresspageauto.dart';
 import 'package:tuneload/pages/progresspagemanual.dart';
 import 'package:tuneload/providers/initprovider.dart';
 import 'package:tuneload/providers/matchingpageprovider.dart';

@@ -12,7 +12,6 @@ import 'package:tuneload/providers/initprovider.dart';
 import 'package:tuneload/providers/matchingpageprovider.dart';
 import 'package:tuneload/providers/progresspagemanualprovider.dart';
 import 'package:tuneload/providers/progressprovider.dart';
-// import 'package:tuneload/themes/tuneloadTheme.dart';
 import 'pages/finishpage.dart';
 import 'providers/finishpageprovider.dart';
 
@@ -28,7 +27,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -37,11 +35,6 @@ class MyApp extends StatelessWidget {
         initialRoute: HomePage.routeName,
         routes: {
           HomePage.routeName: (context) => const HomePage(),
-          // ProgressPage.routeName: (context) => ChangeNotifierProvider<ProgressPageProvider>(
-          //     create: (context) => ProgressPageProvider(),
-          //     child: const ProgressPage(
-          //       urlArg: '',
-          //     )),
           SettingPage.routeName: (context) => const SettingPage(),
         },
         onGenerateRoute: (settings) {
@@ -91,7 +84,6 @@ class MyApp extends StatelessWidget {
                     )));
           }
         },
-        // theme: tuneloadTheme,
         theme: ThemeData(
             primarySwatch: const MaterialColor(4292125811, {
               50: Color(0xfff9f2eb),
@@ -105,12 +97,8 @@ class MyApp extends StatelessWidget {
               800: Color(0xff4e3318),
               900: Color(0xff271a0c),
             }),
-            // brightness: Brightness.dark,
             appBarTheme: const AppBarTheme(
               foregroundColor: Colors.white,
-            ))
-        //     primaryColor: const Color(0xFFd4a473) //, colorScheme: ColorScheme.fromSwatch().copyWith(secondary: const Color(0xFF5c706f)),
-        // home: HomeScreen(),
-        );
+            )));
   }
 }

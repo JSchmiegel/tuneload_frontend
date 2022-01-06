@@ -79,7 +79,6 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
 
   @override
   Widget build(BuildContext context) {
-    // var f = NumberFormat("#0.0#", "en_US");
     int addProgress = 0;
     if (uplaoding!) {
       addProgress = 1;
@@ -87,7 +86,7 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
 
     return Scaffold(
       body: Consumer<ProgressPageManualProvider>(
-          builder: (_, providerProgressManual, __) => providerProgressManual.isProcessing // && true // just as an idea
+          builder: (_, providerProgressManual, __) => providerProgressManual.isProcessing
               ? buildLoadingPage('Getting ready to download\n${widget.spotifyId}')
               : Container(
                   margin: firstMargin,
@@ -145,8 +144,7 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                                         if (providerProgress.progressResponse.index + 1 >=
                                                 providerProgressManual.progressManualResponse.data['songs'].length &&
                                             uplaoding!) {
-                                          providerProgress.progressResponse.index =
-                                              -1; // Idea to fix the issue with the persisten progress state when downloading a new album after an old was already downloaded
+                                          providerProgress.progressResponse.index = -1;
                                           return Row(
                                             children: const [
                                               Text('Uploading songs'),
@@ -195,7 +193,6 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
                                   ),
                                   Text(
                                       'Process:  ${providerProgress.progressResponse.index + 2}/${providerProgressManual.progressManualResponse.data['songs'].length + addProgress}'),
-                                  // 'Process: ${providerProgress.progressResponse.index + 2}/${providerProgressManual.progressManualResponse.data['songs'].length + addProgress} (${f.format(((providerProgress.progressResponse.index + 2 ) / (providerProgressManual.progressManualResponse.data['songs'].length + addProgress)) * 100)}%)'),
                                 ],
                               ),
                       )
@@ -219,7 +216,6 @@ class _ProgressPageManualState extends State<ProgressPageManual> {
             actions: [
               TextButton(
                   onPressed: () {
-                    // Close the dialog
                     Navigator.of(context).pop();
                   },
                   child: const Text('No')),

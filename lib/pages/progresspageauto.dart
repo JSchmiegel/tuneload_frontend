@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tuneload/helper/apihelper.dart';
 import 'package:tuneload/global.dart';
 import 'package:tuneload/pages/errorpage.dart';
+import 'package:tuneload/pages/homepage.dart';
 import 'package:tuneload/providers/initprovider.dart';
 
 class ProgressPageAuto extends StatefulWidget {
@@ -43,7 +44,6 @@ class _ProgressPageAutoState extends State<ProgressPageAuto> {
     return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
-          // appBar: AppBar(title: const Text('TuneLoad')),
           body: Consumer<InitProvider>(
               builder: (_, provider, __) => provider.isProcessing
                   ? buildLoadingPage('Getting ready to download\n${widget.urlArg}')
@@ -89,8 +89,8 @@ class _ProgressPageAutoState extends State<ProgressPageAuto> {
                                                 child: const Text('No')),
                                             TextButton(
                                                 onPressed: () {
-                                                  // Close the dialog
-                                                  Navigator.of(context).popUntil(ModalRoute.withName('/'));
+                                                  // Close the dialog and navigate to HomePage
+                                                  Navigator.of(context).popUntil(ModalRoute.withName(HomePage.routeName));
                                                 },
                                                 child: const Text('Yes')),
                                           ],
@@ -98,7 +98,6 @@ class _ProgressPageAutoState extends State<ProgressPageAuto> {
                                       );
                                     },
                                     splashRadius: buttonSplashRadius,
-                                    // hoverColor: Colors.red[500],
                                   )
                                 ],
                               ),
@@ -109,14 +108,4 @@ class _ProgressPageAutoState extends State<ProgressPageAuto> {
                       ))),
         ));
   }
-
-  // Future<Map<String, dynamic>> _callBackendApiGetInit() async {
-  //   var api = APIHelper();
-  //   final response = await api.getInit(urlArg);
-  //   if (response.statusCode == 200) {
-  //     return json.decode(response.body);
-  //   } else {
-  //     throw Exception('Failed to get /tuneload/init');
-  //   }
-  // }
 }

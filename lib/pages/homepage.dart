@@ -17,9 +17,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String? url;
-  // bool? upload = true;
-  // bool? deleteJson = true;
-  // bool? searchLyrics = true;
   bool? autoMatching = false;
 
   Map<String, dynamic>? initResponse;
@@ -42,7 +39,6 @@ class _HomePageState extends State<HomePage> {
             icon: const Icon(Icons.settings),
             onPressed: () {
               Navigator.pushNamed(context, SettingPage.routeName);
-              // Navigator.pushNamed(context, MatchingPage.routeName);
             },
             splashRadius: buttonSplashRadius,
           )
@@ -56,7 +52,6 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextFormField(
-                  // autofocus: true,
                   textInputAction: TextInputAction.next,
                   validator: (value) {
                     String pattern =
@@ -119,46 +114,6 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ],
                             ),
-                            // Row(
-                            //   children: [
-                            //     Checkbox(
-                            //         value: searchLyrics,
-                            //         onChanged: (value) {
-                            //           // When the value of the checkbox changes,
-                            //           // update the FormFieldState so the form is
-                            //           // re-validated.
-                            //           formFieldState.didChange(value);
-                            //           setState(() {
-                            //             searchLyrics = value;
-                            //           });
-                            //         },
-                            //         splashRadius: buttonSplashRadius),
-                            //     Text(
-                            //       'search for "... Lyrics"',
-                            //       style: Theme.of(context).textTheme.subtitle1,
-                            //     ),
-                            //   ],
-                            // ),
-                            // Row(
-                            //   children: [
-                            //     Checkbox(
-                            //         value: deleteJson,
-                            //         onChanged: (value) {
-                            //           // When the value of the checkbox changes,
-                            //           // update the FormFieldState so the form is
-                            //           // re-validated.
-                            //           formFieldState.didChange(value);
-                            //           setState(() {
-                            //             deleteJson = value;
-                            //           });
-                            //         },
-                            //         splashRadius: buttonSplashRadius),
-                            //     Text(
-                            //       'delete .json after download',
-                            //       style: Theme.of(context).textTheme.subtitle1,
-                            //     ),
-                            //   ],
-                            // ),
                             Row(
                               children: [
                                 Checkbox(
@@ -196,26 +151,6 @@ class _HomePageState extends State<HomePage> {
                             return;
                           }
 
-//                           showDialog<void>(
-//                             context: context,
-//                             builder: (context) => AlertDialog(
-//                               title: const Text('Test'),
-//                               content: Text('''URL: $url
-// Upload: $upload
-// Search for Lyrics: $searchLyrics
-// Delete JSOn: $deleteJson'''),
-//                               actions: [
-//                                 TextButton(
-//                                   child: const Text('Done'),
-//                                   onPressed: () {
-//                                     Navigator.of(context).pop();
-//                                   },
-//                                 ),
-//                               ],
-//                             ),
-//                           );
-                          // Map<String, dynamic> response = await _callBackendApiGetInit();
-                          // _callBackendApiGetInit();
                           if (autoMatching == true) {
                             // progressPage
                             Navigator.pushNamed(context, ProgressPageAuto.routeName, arguments: url);
