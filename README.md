@@ -15,4 +15,9 @@ TuneLoad is a Flutter-Client for a backend API that downloads a YouTube-Playlist
 A swagger definition of the Backend-API can be found in [./doc/apidoc.yml](./doc/apidoc.yml).
 ![Swagger definition of Backend-API (Screenshot)](./doc/apidoc.png)
 
+## Features and Ideas to implement (To-do)
 
+- [ ] give possibility to download files local
+- [ ] add function to download playlists and albums from Spotify
+- [ ] publish Backend-API (at the moment not published because of used API keys)
+- [ ] Tests
