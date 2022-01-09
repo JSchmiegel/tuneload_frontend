@@ -1,0 +1,363 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: TuneLoad-API
+  description: API for c
+servers:
+  - description: server for TuneLoad (planned "http:api/tuneload.com/1.0.0")
+    url: http://127.0.0.1:32500/1.0.0
+tags:
+  - name: settings
+    description: Everything about settings
+  - name: tuneload
+    description: Everything about tuneload
+paths:
+  /settings:
+    get:
+      tags:
+        - settings
+      summary: Return the settings (config.json)
+      responses:
+        200:
+          description: Found config.json and returns saved settings
+          content:
+                application/json:
+                  schema:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Settings"
+        404:
+            description: There is no config.json file.
+        500:
+            description: Unspecific exception
+    post:
+      tags:
+        - settings
+      summary: Update settings
+      requestBody:
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Settings"
+      responses:
+        200:
+          description: Found config.json and returns saved settings
+          content:
+                application/json:
+                  schema:
+                      $ref: "#/components/schemas/Settings"
+        404:
+            description: There is no config.json file.
+        500:
+            description: Unspecific exception
+  /tuneload/init:
+    get:
+      tags:
+        - tuneload
+      summary: Returns first info about the playlist on youtube
+      parameters:
+        - name: url
+          in: query
+          description: Youtube or Spotify URL of album or playlist
+          required: true
+          schema:
+            type: string
+            example: https://www.youtube.com/playlist?list=OLAK5uy_kPXSp9U1LO8uU9aFbxzIrSNYHded8K9gY
+      responses:
+        200:
+          description: Successful Found config.json and returns saved settings
+          content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 5b0d861e25a5494ea44d0a9e2b863fcb
+                      file:
+                        type: string
+                        example: /tmp_tuneload/5b0d861e25a5494ea44d0a9e2b863fcb.json
+                      plattform:
+                        type: string
+                        example: youtube
+                      type:
+                        type: string
+                        example: album
+                      org_name:
+                        type: string
+                        example: A Night At The Opera
+                      songs:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              example: A Night At The Opera
+                            yt_link:
+                              type: string
+                              example: https://www.youtube.com/watch?v=fJ9rUzIMcZQ
+                      href:
+                        type: string
+                        example: https://www.youtube.com/playlist?list=OLAK5uy_kTV6O4QNnkTdBPpcOEUcHqNFQ6Y9jrKbA
+        500:
+            description: Unspecific exception
+  /tuneload/matching/{id}:
+    get:
+      tags:
+        - tuneload
+      summary: Get possible matchings
+      parameters:
+          - name: id
+            in: path
+            description: Id of data file
+            required: true
+            schema:
+              type: string
+              example: 15071e4d30d241ca96ca8cb837be716d
+      responses:
+        200:
+          description: Found possible matchings on Spotify
+          content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      yt_title:
+                        type: string
+                        example: Music Of The Spheres
+                      yt_num_of_songs:
+                        type: integer
+                        example: 12
+                      matches:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            album:
+                              type: string
+                              example: Music Of The Spheres
+                            album_artist:
+                              type: string
+                              example: Coldplay
+                            id:
+                              type: string
+                              example: 06mXfvDsRZNfnsGZvX2zpb
+                            num_of_songs:
+                              type: integer
+                              example: 12
+        500:
+          description: Unspecific exception
+        501:
+          description: The plattform in your data file is not supported
+    put:
+      tags:
+        - tuneload
+      summary: Put matching for the selected download
+      parameters:
+          - name: id
+            in: path
+            description: Id of data file
+            required: true
+            schema:
+              type: string
+              example: 15071e4d30d241ca96ca8cb837be716d
+      requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  matching:
+                    type: string
+                    example: 06mXfvDsRZNfnsGZvX2zpb
+      responses:
+        200:
+          description: Matched Youtube and Spotify elements
+          content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 5b0d861e25a5494ea44d0a9e2b863fcb
+                      file:
+                        type: string
+                        example: /tmp_tuneload/5b0d861e25a5494ea44d0a9e2b863fcb.json
+                      plattform:
+                        type: string
+                        example: youtube
+                      type:
+                        type: string
+                        example: album
+                      org_name:
+                        type: string
+                        example: A Night At The Opera
+                      songs:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            album:
+                              type: string
+                              example: A Night At The Opera
+                            album_artist:
+                              type: string
+                              example: Queen
+                            year:
+                              type: string
+                              example: 1975-11-21
+                            image:
+                              type: string
+                              example: https://i.scdn.co/image/ab67616d0000b2733025a441495664948b809537
+                            title:
+                              type: string
+                              example: Bohemian Rhapsody - Remastered 2011
+                            artist:
+                              type: string
+                              example: Queen
+                            title_id:
+                              type: string
+                              example: 5eIDxmWYxRA0HJBYM9bIIS
+                            track_num:
+                              type: string
+                              example: 11
+                            disc_num:
+                              type: string
+                              example: 1
+                            yt_link:
+                              type: string
+                              example: https://www.youtube.com/watch?v=fJ9rUzIMcZQ
+                      href:
+                        type: string
+                        example: https://www.youtube.com/playlist?list=OLAK5uy_kTV6O4QNnkTdBPpcOEUcHqNFQ6Y9jrKbA
+        500:
+          description: Unspecific exception
+  /tuneload/downloading/{id}:
+    get:
+      tags:
+        - tuneload
+      summary: Downloading one track
+      parameters:
+        - name: id
+          in: path
+          description: Id of data file
+          required: true
+          schema:
+            type: string
+            example: 15071e4d30d241ca96ca8cb837be716d
+        - name: num_of_songs
+          in: query
+          description: Nummber of song which should be downloaded
+          required: true
+          schema:
+            type: string
+            example: 11
+      responses:
+        200:
+          description: Successfull downloaded file
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  album:
+                    type: string
+                    example: A Night At The Opera
+                  album_artist:
+                    type: string
+                    example: Queen
+                  year:
+                    type: string
+                    example: 1975-11-21
+                  image:
+                    type: string
+                    example: https://i.scdn.co/image/ab67616d0000b2733025a441495664948b809537
+                  title:
+                    type: string
+                    example: Bohemian Rhapsody - Remastered 2011
+                  artist:
+                    type: string
+                    example: Queen
+                  title_id:
+                    type: string
+                    example: 5eIDxmWYxRA0HJBYM9bIIS
+                  track_num:
+                    type: string
+                    example: 11
+                  disc_num:
+                    type: string
+                    example: 1
+                  yt_link:
+                    type: string
+                    example: https://www.youtube.com/watch?v=fJ9rUzIMcZQ
+                  path:
+                    type: string
+                    example: ./tmp_tuneload/downloads/Queen/ANightAtTheOpera/BohemianRhapsodyRemastered2011.mp3
+        500:
+          description: Unspecific exception
+  /tuneload/uploading/{id}:
+    put:
+      tags:
+        - tuneload
+      summary: Uploades the downloaded files
+      parameters:
+        - name: id
+          in: path
+          description: Id of data file
+          required: true
+          schema:
+            type: string
+            example: 15071e4d30d241ca96ca8cb837be716d
+      responses:
+        200: 
+          description: Successfull uploaded the downloaded files
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  album:
+                    type: string
+                    example: A Night At The Opera
+                  album_artist:
+                    type: string
+                    example: Queen
+                  image:
+                    type: string
+                    example: https://i.scdn.co/image/ab67616d0000b2733025a441495664948b809537
+                  num_of_songs:
+                    type: integer
+                    example: 12
+        500:
+          description: Unspecific exception
+
+components:
+  schemas:
+    Settings:
+      type: object
+      properties:
+        address:
+          type: string
+          example: http://127.0.0.1/
+        port:
+          type: string
+          example: 32400
+        user:
+          type: string
+          example: pi
+        password:
+          type: string
+          example: "*******"
+        token:
+          type: string
+          example: tgDmXyRqCz3eoB5yVpzW
+        paths:
+          type: object
+          properties:
+            music:
+              type: string
+              example: /media/Music/
