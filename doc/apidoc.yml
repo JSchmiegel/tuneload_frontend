@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   version: 1.0.0
   title: TuneLoad-API
-  description: API for c
+  description: API for the TuneLoad frontend
 servers:
   - description: server for TuneLoad (planned "http:api/tuneload.com/1.0.0")
     url: http://127.0.0.1:32500/1.0.0
